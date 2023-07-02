@@ -1,0 +1,49 @@
+:host{
+    display: block;
+}
+
+
+$black: #1b1e23;
+$size: 100%;
+$white: #f4eed7;
+$feature : var(--color-primary);
+
+.content{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock {
+    width: $size;
+    aspect-ratio: 1/1;
+    border-radius: #{$size / 2};
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    &__indicator {
+        position: absolute;
+        left: calc(50% - 1px);
+        width: 2px;
+        background: $white;
+        transform-origin: bottom center;
+        z-index: 2;
+        border-radius: 1px;
+    }
+
+    &__indicator {
+        height: #{($size / 2) - 2};
+        border-top: 4px solid $feature;
+        background: none;
+    }
+}
+
+@for $i from 1 through 60 {
+    section:nth-of-type(#{$i}) {
+        transform: rotateZ(calc(6deg * #{$i}));
+    }
+}

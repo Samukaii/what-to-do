@@ -1,0 +1,8 @@
+<ng-container [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label>{{label}}</mat-label>
+        <input matInput [placeholder]="placeholder || ''" [formControlName]="name" />
+        <mat-icon *ngIf="icon" matSuffix>{{icon}}</mat-icon>
+        <mat-hint *ngIf="hint">{{hint}}</mat-hint>
+    </mat-form-field>
+</ng-container>

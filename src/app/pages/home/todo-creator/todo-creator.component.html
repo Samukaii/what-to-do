@@ -1,0 +1,15 @@
+<app-todo-create
+*ngIf="false"
+    [form]="form"
+    (send)="create($event)"
+/>
+
+<app-todo-time 
+    [currentTodo]="currentTodo"
+/>
+
+<app-todo-list
+    (toggle)="toggle($event)"
+    [items]="service.todos()"
+    [actions]="actions"
+/>

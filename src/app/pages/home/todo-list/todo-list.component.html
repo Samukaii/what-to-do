@@ -1,0 +1,10 @@
+<ul *ngIf="!!items.length; else noResults">
+    <li *ngFor="let item of items">
+        <app-todo-item (toggle)="toggle.emit($event)" [item]="item" [actions]="actions" />
+    </li>
+</ul>
+
+<ng-template #noResults>
+    <app-no-results #noResults icon="format_list_bulleted" label="Nenhuma tarefa adicionada"
+        description="Adicione uma tarefa" />
+</ng-template>
