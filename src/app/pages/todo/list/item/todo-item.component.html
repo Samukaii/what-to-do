@@ -1,0 +1,16 @@
+<mat-checkbox [checked]="item.completed" (change)="toggle.emit(item)" />
+
+<div class="body">
+    <div class="body__content">
+        <strong>{{item.title}}</strong>
+        <pre *ngIf="item.description">
+            {{item.description}}
+        </pre>
+    </div>
+
+  <app-actions-container
+    [actions]="actions"
+    [context]="item"
+    alignment="right"
+  />
+</div>

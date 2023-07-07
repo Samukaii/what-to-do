@@ -1,1 +1,8 @@
-{{timeFormatted()}}
+<app-clock
+  [allTimeInSeconds]="time / 60"
+  [currentSeconds]="counter() / 60"
+>
+  <div class="time">
+    {{timeFormatted()}}
+  </div>
+</app-clock>

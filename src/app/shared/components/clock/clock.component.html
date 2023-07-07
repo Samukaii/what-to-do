@@ -1,6 +1,13 @@
 <div class="clock">
-    <section *ngFor="let indicator of indicators" class="clock__indicator"></section>
-    <div class="content">
+    <div
+      [style.transform]="'rotateZ(' + (360 / allTimeInSecondsSignal()) * i + 'deg)'"
+      *ngFor="let indicator of indicators(); let i = index" class="clock__indicator"
+    ></div>
+
+    <div class="clock__pointer"
+         [style.transform]="pointerRotation()"
+    ></div>
+    <div class="clock__content">
         <ng-content></ng-content>
     </div>
 </div>

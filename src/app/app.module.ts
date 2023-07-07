@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeModule } from './pages/home/home.module';
-import { ClockComponent } from './shared/components/clock/clock.component';
+import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {TodoModule} from './pages/todo/todo.module';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -19,8 +19,9 @@ import { ClockComponent } from './shared/components/clock/clock.component';
     CommonModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HomeModule,
-    BrowserAnimationsModule
+    TodoModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -18,6 +18,7 @@ export class InputComponent implements OnInit{
   @Input() label?: string;
   @Input() placeholder?: string;
   @Input() hint?: string;
+  @Input() type?: string;
   @Input() icon?: string;
 
   container = inject(ControlContainer);

@@ -17,6 +17,7 @@ export class TextareaComponent {
   @Input({ required: true }) name!: string;
   @Input() label?: string;
   @Input() placeholder?: string;
+  @Input() rows = 2;
   @Input() hint?: string;
   @Input() icon?: string;
 
