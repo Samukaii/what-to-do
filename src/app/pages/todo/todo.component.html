@@ -1,0 +1,15 @@
+<app-todo-time
+  *ngIf="currentTodo"
+  [currentTodo]="currentTodo"
+/>
+
+<app-actions-container
+  alignment="right"
+  [actions]="[createButton]"
+/>
+
+<app-todo-list
+  (toggle)="toggle($event)"
+  [items]="service.todos()"
+  [actions]="actions"
+/>

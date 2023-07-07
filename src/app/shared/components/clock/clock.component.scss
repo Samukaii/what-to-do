@@ -20,7 +20,7 @@ $feature : var(--color-primary);
 .clock {
     width: $size;
     aspect-ratio: 1/1;
-    border-radius: #{$size / 2};
+    border-radius: calc($size / 2);
     display: flex;
     justify-content: center;
     position: relative;
@@ -36,7 +36,7 @@ $feature : var(--color-primary);
     }
 
     &__indicator {
-        height: #{($size / 2) - 2};
+        height: #{calc($size / 2) - 2};
         border-top: 4px solid $feature;
         background: none;
     }

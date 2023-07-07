@@ -1,0 +1,24 @@
+<app-form
+  [principalTitle]="principalTitle"
+  [formGroup]="form"
+  [actions]="actions"
+>
+  <app-input
+    name="title"
+    label="Nome"
+    placeholder="O que você precisa fazer agora?"
+  />
+  <app-textarea
+    name="description"
+    label="Descrição"
+    [rows]="5"
+    placeholder="Como você precisa fazer?"
+  />
+
+  <app-input
+    name="cycles"
+    label="Quantos ciclos esta tarefa vai durar?"
+    type="number"
+    placeholder="O que você precisa fazer agora?"
+  />
+</app-form>

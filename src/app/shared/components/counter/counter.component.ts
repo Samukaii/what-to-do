@@ -1,8 +1,21 @@
-import { ChangeDetectionStrategy, Component, Input, Signal, WritableSignal, computed, effect, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  Signal,
+  WritableSignal,
+  computed,
+  effect,
+  signal,
+  OnInit, OnDestroy, Output, EventEmitter, inject, ChangeDetectorRef
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { WithSignals } from "../../decorators/with-signals";
+import { inputSignal, writableInputSignal } from "../../utils/input-signal";
 
 const toSignal = <T>(time: T) => signal(time);
 
+@WithSignals()
 @Component({
   selector: 'app-counter',
   standalone: true,
@@ -11,24 +24,37 @@ const toSignal = <T>(time: T) => signal(time);
   styleUrls: ['./counter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CounterComponent {
-  @Input({required: true, alias: "time"})
-  set setTime(time: number){
-    this.time.set(time)
-  };
+export class CounterComponent implements OnDestroy, OnInit {
+  @Output() finish = new EventEmitter();
+  @Input({required: true}) time!: number;
 
-  time = signal(0);
+  counter = signal(this.time);
+  interval?: number;
 
-  private startCount = effect((onCleanup) => {
-    const interval = setInterval(() => {
-      this.time.update(time => time - 1)
+  ngOnInit() {
+    this.restartCounter(this.time);
+  }
+
+  restartCounter(time: number){
+    this.counter.set(time);
+
+    this.interval = setInterval(() => {
+      if(this.counter() === 0){
+        this.finish.emit();
+        this.clearInterval();
+        return;
+      }
+
+      this.counter.update(time => time - 1)
     }, 1000);
+  }
 
-    return onCleanup(() => clearInterval(interval))
-  })
+  ngOnDestroy() {
+    this.clearInterval();
+  }
 
   protected timeFormatted = computed(() => {
-    const time = this.time();
+    const time = this.counter();
 
     let minutes: string | number = Math.floor(time / 60)
     let seconds: string | number = (time - minutes * 60)
@@ -38,4 +64,8 @@ export class CounterComponent {
 
     return `${minutes}:${seconds}`;
   })
+
+  private clearInterval(){
+    clearInterval(this.interval!);
+  }
 }

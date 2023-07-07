@@ -1,0 +1,10 @@
+<div
+  [style.justify-content]="justifyContent()"
+  class="actions">
+  <app-button-action
+    *ngFor="let action of actions"
+    [action]="action"
+    [context]="context"
+  />
+
+</div>
