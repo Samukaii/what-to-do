@@ -10,6 +10,19 @@ $size: 100%;
 $white: #f4eed7;
 $feature: rgb(var(--color-primary));
 
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+
+  border-bottom: 130px solid #ff8989;
+
+  position: absolute;
+  top: 0;
+  left: -3px;
+}
+
 .clock {
   width: $size;
   aspect-ratio: 1/1;
@@ -27,7 +40,6 @@ $feature: rgb(var(--color-primary));
     z-index: 2;
     border-radius: 1px;
     height: 50%;
-    border-top: 150px solid $feature;
     background: none;
     box-sizing: border-box;
     transition: .5s;

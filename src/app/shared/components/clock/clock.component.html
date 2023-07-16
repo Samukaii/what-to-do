@@ -6,7 +6,13 @@
 
     <div class="clock__pointer"
          [style.transform]="pointerRotation()"
-    ></div>
+    >
+      <div class="arrow">
+      </div>
+
+    </div>
+
+
     <div class="clock__content">
         <ng-content></ng-content>
     </div>

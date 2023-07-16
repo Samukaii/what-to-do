@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
-import { ButtonAction } from 'src/app/shared/components/button/types/button-action';
 import { Todo } from '../../models/todo';
+import { ButtonActionsFn } from "../../../../shared/components/button/types/button-actions-fn";
 
 
 @Component({
@@ -12,7 +12,7 @@ import { Todo } from '../../models/todo';
 export class TodoItemComponent {
   @Output() toggle = new EventEmitter<Todo>();
   @Input({ required: true }) item!: Todo
-  @Input() actions: ButtonAction<Todo>[] = [];
+  @Input() actionsFn: ButtonActionsFn<Todo> = () => [];
 
   @HostBinding("class.todo-completed")
   get completed(){

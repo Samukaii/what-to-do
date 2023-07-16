@@ -11,8 +11,7 @@ import { Generic } from '../../types/generic';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonActionComponent<T = void> implements OnChanges {
-  @Input({ required: true }) action!: ButtonAction<T>;
-  @Input() context!: T;
+  @Input({ required: true }) action!: ButtonAction;
 
   config?: {
     component: Type<any>;
@@ -30,6 +29,6 @@ export class ButtonActionComponent<T = void> implements OnChanges {
 
   @HostListener('click')
   onClick(){
-    this.action.click(this.context);
+    this.action.click();
   }
 }

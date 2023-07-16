@@ -5,6 +5,8 @@ import {ButtonAction} from "../../shared/components/button/types/button-action";
 import {DialogService} from "../../shared/services/dialog.service";
 import {TodoUpdateComponent} from "./update/todo-update.component";
 import {TodoCreateComponent} from "./create/todo-create.component";
+import { ButtonActionsFn } from "../../shared/components/button/types/button-actions-fn";
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 
 
 @Component({
@@ -23,35 +25,38 @@ export class TodoComponent implements OnInit {
   otherTodos = computed(() => {
     return this.service.todos().filter((todo) => this.todoInFocus()?.id !== todo.id);
   })
+  dialog = inject(DialogService);
 
-  actions: ButtonAction<Todo>[] = [
-    {
-      type: "icon",
-      click: todo => this.focus(todo),
-      options: {
+  actionsFn: ButtonActionsFn<Todo> = (todo): ButtonAction[] => {
+    return [
+      {
+        type: "icon",
+        click: () => this.focus(todo),
+        options: {
+          color: "primary",
+          icon: "play_circle"
+        }
+      },
+      {
+        type: "icon",
+          click: () => this.edit(todo),
+        options: {
         color: "primary",
-        icon: "play_circle"
+          icon: "edit"
       }
-    },
-    {
-      type: "icon",
-      click: todo => this.edit(todo),
-      options: {
-        color: "primary",
-        icon: "edit"
-      }
-    },
-    {
-      type: "icon",
-      click: todo => this.delete(todo),
-      options: {
+      },
+      {
+        type: "icon",
+          click: () => this.delete(todo),
+        options: {
         color: "warn",
-        icon: "delete"
+          icon: "delete"
       }
-    },
-  ];
+      }
+    ]
+  };
 
-  createButton: ButtonAction = {
+  createButtonFn = (): ButtonAction[] => [{
     type: "raised",
     click: () => this.create(),
     options: {
@@ -59,9 +64,7 @@ export class TodoComponent implements OnInit {
       color: "primary",
       text: "Nova tarefa"
     }
-  }
-
-  dialog = inject(DialogService);
+  }];
 
   @HostListener('window:keydown.control.z')
   recover(){
@@ -91,6 +94,10 @@ export class TodoComponent implements OnInit {
 
   toggle(todo: Todo){
     this.service.toggle(todo)
+  }
+
+  reorder(event: CdkDragDrop<Todo>){
+    this.service.reorder(event);
   }
 
   create() {

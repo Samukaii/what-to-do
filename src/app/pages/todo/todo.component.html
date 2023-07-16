@@ -1,4 +1,7 @@
-<app-todo-time />
+<app-todo-time
+  *ngIf="todoInFocus() as inFocus"
+  [currentTodo]="inFocus"
+/>
 
 <div class="todo-in-focus" *ngIf="todoInFocus() as inFocus">
   <app-todo-item
@@ -11,12 +14,13 @@
 
 <app-actions-container
   alignment="right"
-  [actions]="[createButton]"
+  [actionsFn]="createButtonFn"
 />
 
 
 <app-todo-list
+  (reorder)="reorder($event)"
   (toggle)="toggle($event)"
   [items]="otherTodos()"
-  [actions]="actions"
+  [actionsFn]="actionsFn"
 />

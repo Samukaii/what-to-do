@@ -22,6 +22,7 @@ import {TodoUpdateComponent} from "./update/todo-update.component";
 import {TodoCreateComponent} from "./create/todo-create.component";
 import {FormComponent} from "../../shared/components/form/form/form.component";
 import { NoResultsComponent } from "../../shared/components/actions-container/no-results.component";
+import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
 
 
 @NgModule({
@@ -50,7 +51,9 @@ import { NoResultsComponent } from "../../shared/components/actions-container/no
     TabsComponent,
     CounterComponent,
     FormComponent,
-    NoResultsComponent
+    NoResultsComponent,
+    CdkDropList,
+    CdkDrag
   ]
 })
 export class TodoModule {

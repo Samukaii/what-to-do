@@ -14,13 +14,14 @@ import { WithSignals } from "../../decorators/with-signals";
 import { TimeHelpers } from "../../utils/time-helpers";
 import { ClockComponent } from "../clock/clock.component";
 import { whenInputChange } from "../../utils/when-input-change";
+import { RectClockComponent } from "../rect-clock/rect-clock.component";
 
 
 @WithSignals()
 @Component({
   selector: 'app-counter',
   standalone: true,
-  imports: [CommonModule, ClockComponent],
+  imports: [CommonModule, ClockComponent, RectClockComponent],
   templateUrl: './counter.component.html',
   styleUrls: ['./counter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -48,6 +49,10 @@ export class CounterComponent implements OnDestroy, OnInit {
 
   play(){
     this.isPlaying.set(true);
+  }
+
+  restart(){
+    this.counter.set(this.time);
   }
 
   ngOnDestroy() {

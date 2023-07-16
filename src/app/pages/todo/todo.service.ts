@@ -4,6 +4,7 @@ import { TodoForm } from './models/todo-form';
 import { Todo } from './models/todo';
 import { FormValue } from "../../shared/types/form-value";
 import { TrashService } from "../../shared/services/trash.service";
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,16 @@ export class TodoService {
         completed: !item.completed
       }
     }))
+  }
+
+  reorder(event: CdkDragDrop<Todo>){
+    const reordered = [...this.todos()];
+    moveItemInArray(reordered, event.previousIndex, event.currentIndex);
+    console.log(this.todos());
+
+    this.todos.set(reordered);
+    console.log(this.todos());
+
   }
 
   recover(){

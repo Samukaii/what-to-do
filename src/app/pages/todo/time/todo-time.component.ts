@@ -13,6 +13,8 @@ import { inputSignal } from "../../../shared/utils/input-signal";
 import { WithSignals } from "../../../shared/decorators/with-signals";
 import { CounterComponent } from "../../../shared/components/counter/counter.component";
 import { ButtonAction } from "../../../shared/components/button/types/button-action";
+import { ButtonActionsFn } from "../../../shared/components/button/types/button-actions-fn";
+import { whenInputChange } from "../../../shared/utils/when-input-change";
 
 @WithSignals()
 @Component({
@@ -23,14 +25,19 @@ import { ButtonAction } from "../../../shared/components/button/types/button-act
 })
 export class TodoTimeComponent {
   @ViewChild(CounterComponent, {static: true}) counter!: CounterComponent;
+  @Input({required: true}) currentTodo!: Todo;
   @Input() restTime = 5 * 60;
   @Input() workTime = 25 * 60;
 
   isRest = signal(false);
   currentCycle = signal(0);
 
-  actions: Signal<ButtonAction[]> = computed(() => {
-    return [
+  currentTodoSignal = whenInputChange(this, "currentTodo", () => {
+    this.counter.restart();
+  });
+
+  actionsFn: Signal<ButtonActionsFn> = computed(() => {
+    return () => [
       {
         type: "raised",
         click: () => {
@@ -50,7 +57,7 @@ export class TodoTimeComponent {
         },
         condition: !this.counter?.isCounting(),
         options: {
-          text: "Despausar",
+          text: "Continuar",
           icon: "play_arrow",
           color: "primary"
         }

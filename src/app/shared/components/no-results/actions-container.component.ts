@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { inputSignal } from "../../utils/input-signal";
 import { WithSignals } from "../../decorators/with-signals";
 import { ButtonActionModule } from "../button/button-action.module";
-import { ButtonAction } from "../button/types/button-action";
+import { ButtonActionsFn } from "../button/types/button-actions-fn";
 
 @WithSignals()
 @Component({
@@ -16,11 +16,13 @@ import { ButtonAction } from "../button/types/button-action";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionsContainerComponent<T> {
-  @Input() actions: ButtonAction<T>[] = [];
+  @Input({required: true}) actionsFn!: ButtonActionsFn<T>;
   @Input() context!: T;
   @Input() alignment: "left" | "center" | "right" = "right";
 
   alignmentSignal = inputSignal(this, "alignment");
+  contextSignal = inputSignal(this, "context");
+  actionsFnSignal = inputSignal(this, "actionsFn");
 
   justifyContent = computed(() => {
     const alignment = this.alignmentSignal();
@@ -28,5 +30,11 @@ export class ActionsContainerComponent<T> {
     if (alignment === "right") return "flex-end";
     if (alignment === "left") return "flex-start";
     return "center";
+  })
+
+  computedActions = computed(() => {
+    const actionsFn = this.actionsFnSignal();
+
+    return actionsFn(this.contextSignal());
   })
 }
