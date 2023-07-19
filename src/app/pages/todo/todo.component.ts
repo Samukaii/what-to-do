@@ -1,4 +1,4 @@
-import {Component, computed, HostListener, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, HostListener, inject, OnInit, Signal, signal} from '@angular/core';
 import {TodoService} from "./todo.service";
 import {Todo} from "./models/todo";
 import {ButtonAction} from "../../shared/components/button/types/button-action";
@@ -15,23 +15,22 @@ import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 })
 export class TodoComponent implements OnInit {
   service = inject(TodoService);
-  currentTodoId = signal<number | undefined>(undefined);
-
   todoInFocus = computed(() => {
-    const all = this.service.todos();
-    return all.find(todo => todo.id === this.currentTodoId());
+    return this.service.todos().find(todo => todo.inFocus);
   });
 
   otherTodos = computed(() => {
-    return this.service.todos().filter((todo) => this.todoInFocus()?.id !== todo.id);
-  })
+    return this.service.todos().filter((todo) => !todo.inFocus);
+  });
+
   dialog = inject(DialogService);
 
-  actionsFn: ButtonActionsFn<Todo> = (todo): ButtonAction[] => {
-    return [
+  actionsFn = computed<ButtonActionsFn<Todo>>(() => {
+    return (todo): ButtonAction[] => [
       {
         type: "icon",
         click: () => this.focus(todo),
+        condition: this.todoInFocus()?.id !== todo.id,
         options: {
           color: "primary",
           icon: "play_circle"
@@ -39,22 +38,22 @@ export class TodoComponent implements OnInit {
       },
       {
         type: "icon",
-          click: () => this.edit(todo),
+        click: () => this.edit(todo),
         options: {
-        color: "primary",
+          color: "primary",
           icon: "edit"
-      }
+        }
       },
       {
         type: "icon",
-          click: () => this.delete(todo),
+        click: () => this.delete(todo),
         options: {
-        color: "warn",
+          color: "warn",
           icon: "delete"
-      }
+        }
       }
     ]
-  };
+  })
 
   createButtonFn = (): ButtonAction[] => [{
     type: "raised",
@@ -72,11 +71,11 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentTodoId.set(this.service.todos()[0]?.id);
+    this.service.focus(this.service.todos()[0].id)
   }
 
   focus(todo: Todo) {
-    this.currentTodoId.set(todo.id);
+    this.service.focus(todo.id);
   }
 
   edit(todo: Todo) {
@@ -106,5 +105,13 @@ export class TodoComponent implements OnInit {
         onSend: changes => this.service.create(changes)
       }
     })
+  }
+
+  updateTimeSpent(timeSpent: number){
+    const inFocus = this.todoInFocus();
+
+    if(!inFocus) return;
+
+    this.service.registerTime(inFocus.id, timeSpent)
   }
 }

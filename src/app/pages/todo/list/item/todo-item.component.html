@@ -8,9 +8,15 @@
         </pre>
     </div>
 
-  <app-actions-container
-    [actionsFn]="actionsFn"
-    [context]="item"
-    alignment="right"
-  />
+  <div class="right">
+<!--    <div>-->
+<!--      {{item.timeSpent | secondsToTime}}-->
+<!--    </div>-->
+
+    <app-actions-container
+      [actionsFn]="actionsFn"
+      [context]="item"
+      alignment="right"
+    />
+  </div>
 </div>

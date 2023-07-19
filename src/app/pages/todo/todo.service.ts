@@ -44,13 +44,15 @@ export class TodoService {
   }
 
   reorder(event: CdkDragDrop<Todo>){
-    const reordered = [...this.todos()];
-    moveItemInArray(reordered, event.previousIndex, event.currentIndex);
-    console.log(this.todos());
+    const inFocus = this.todos().find(todo => todo.inFocus);
+    const notInFocus = this.todos().filter(todo => !todo.inFocus)
+    const result: Todo[] = [...notInFocus];
 
-    this.todos.set(reordered);
-    console.log(this.todos());
+    moveItemInArray(result, event.previousIndex, event.currentIndex);
 
+    if(inFocus) result.unshift(inFocus);
+
+    this.todos.set(result);
   }
 
   recover(){
@@ -66,6 +68,19 @@ export class TodoService {
     });
   }
 
+  registerTime(id: number, seconds: number){
+    this.todos.update(todos => {
+      return todos.map(todo => {
+        if(todo.id !== id) return todo;
+
+        return {
+          ...todo,
+          timeSpent: todo.timeSpent + seconds
+        }
+      })
+    })
+  }
+
   create(value: FormValue<TodoForm>) {
     const { title, description, cycles } = value;
     if (!title) return;
@@ -75,8 +90,26 @@ export class TodoService {
       title,
       cycles,
       description: description ?? "",
-      completed: false
+      completed: false,
+      inFocus: false,
+      timeSpent: 0
     }, ...items]);
+  }
+
+  focus(id: number){
+    this.todos.update(todos => {
+      return todos.map(todo => {
+        if(todo.id !== id) return {
+          ...todo,
+          inFocus: false
+        };
+
+        return {
+          ...todo,
+          inFocus: true
+        }
+      })
+    })
   }
 
   update(id: number, changes: Partial<FormValue<TodoForm>>){

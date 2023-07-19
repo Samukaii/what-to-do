@@ -23,6 +23,7 @@ import {TodoCreateComponent} from "./create/todo-create.component";
 import {FormComponent} from "../../shared/components/form/form/form.component";
 import { NoResultsComponent } from "../../shared/components/actions-container/no-results.component";
 import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
+import { SecondsToTimePipe } from "../../shared/pipes/seconds-to-time.pipe";
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
     FormComponent,
     NoResultsComponent,
     CdkDropList,
-    CdkDrag
+    CdkDrag,
+    SecondsToTimePipe
   ]
 })
 export class TodoModule {

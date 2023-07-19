@@ -1,7 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
+  computed, effect,
   EventEmitter,
   Input,
   OnDestroy,
@@ -28,6 +28,7 @@ import { RectClockComponent } from "../rect-clock/rect-clock.component";
 })
 export class CounterComponent implements OnDestroy, OnInit {
   @Output() finish = new EventEmitter();
+  @Output() timeChange = new EventEmitter<number>();
   @Input({required: true}) time = 0;
 
   protected counter = signal(this.time);
@@ -35,9 +36,14 @@ export class CounterComponent implements OnDestroy, OnInit {
   private isPlaying = signal(false);
   isCounting = computed(() => this.isPlaying())
   private interval?: number;
+
   private updateCounter = whenInputChange(this, "time", (time) => {
     this.counter.set(time);
   });
+
+  emitCounterChange = effect(() => {
+    this.timeChange.emit(this.counter());
+  })
 
   ngOnInit() {
     this.setupCounter();

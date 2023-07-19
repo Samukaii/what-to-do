@@ -6,7 +6,7 @@ import {
   effect,
   signal,
   computed,
-  ViewChild, Signal
+  ViewChild, Signal, Output, EventEmitter
 } from '@angular/core';
 import { Todo } from '../models/todo';
 import { inputSignal } from "../../../shared/utils/input-signal";
@@ -25,6 +25,7 @@ import { whenInputChange } from "../../../shared/utils/when-input-change";
 })
 export class TodoTimeComponent {
   @ViewChild(CounterComponent, {static: true}) counter!: CounterComponent;
+  @Output() timeSpent = new EventEmitter<number>();
   @Input({required: true}) currentTodo!: Todo;
   @Input() restTime = 5 * 60;
   @Input() workTime = 25 * 60;
@@ -35,6 +36,11 @@ export class TodoTimeComponent {
   currentTodoSignal = whenInputChange(this, "currentTodo", () => {
     this.counter.restart();
   });
+
+  emitTimeSpent = effect(() => {
+    const time = (this.currentCycle() * (this.restTime * this.workTime))
+    this.timeSpent.emit(time);
+  })
 
   actionsFn: Signal<ButtonActionsFn> = computed(() => {
     return () => [

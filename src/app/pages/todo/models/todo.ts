@@ -4,4 +4,6 @@ export interface Todo {
   description?: string;
   cycles: number;
   completed: boolean;
+  inFocus: boolean;
+  timeSpent: number;
 }

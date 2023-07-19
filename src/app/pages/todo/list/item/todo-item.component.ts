@@ -12,6 +12,7 @@ import { ButtonActionsFn } from "../../../../shared/components/button/types/butt
 export class TodoItemComponent {
   @Output() toggle = new EventEmitter<Todo>();
   @Input({ required: true }) item!: Todo
+  @Input() showTimeSpend = true;
   @Input() actionsFn: ButtonActionsFn<Todo> = () => [];
 
   @HostBinding("class.todo-completed")

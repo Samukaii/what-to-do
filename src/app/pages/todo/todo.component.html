@@ -7,6 +7,7 @@
   <app-todo-item
     class="mat-elevation-z1"
     (toggle)="toggle($event)"
+    [actionsFn]="actionsFn()"
     [item]="inFocus"
   >
   </app-todo-item>
@@ -22,5 +23,5 @@
   (reorder)="reorder($event)"
   (toggle)="toggle($event)"
   [items]="otherTodos()"
-  [actionsFn]="actionsFn"
+  [actionsFn]="actionsFn()"
 />
