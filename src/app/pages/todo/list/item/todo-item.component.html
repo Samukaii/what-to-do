@@ -1,22 +1,26 @@
-<mat-checkbox [checked]="item.completed" (change)="toggle.emit(item)" />
+<div class="container">
+  <mat-checkbox [checked]="item.completed" (change)="toggle.emit(item)" />
 
-<div class="body">
+  <div class="body">
     <div class="body__content">
-        <strong>{{item.title}}</strong>
-        <pre *ngIf="item.description">
+      <strong>{{item.title}}</strong>
+      <pre *ngIf="item.description">
             {{item.description}}
         </pre>
+
     </div>
 
-  <div class="right">
-<!--    <div>-->
-<!--      {{item.timeSpent | secondsToTime}}-->
-<!--    </div>-->
 
-    <app-actions-container
-      [actionsFn]="actionsFn"
-      [context]="item"
-      alignment="right"
-    />
+    <div class="right">
+
+
+      <app-actions-container
+        [actionsFn]="actionsFn"
+        [context]="item"
+        alignment="right"
+      />
+
+    </div>
+
   </div>
 </div>

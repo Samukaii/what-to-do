@@ -9,7 +9,6 @@ export const writableInputSignal = <T, K extends keyof T>(component: T, key: K):
 
   (component as any).ngOnChanges = (changes: SimpleChanges) => {
     if(changes?.[key as string]){
-      console.log(changes)
       signalProperty.set(component[key])
     }
 

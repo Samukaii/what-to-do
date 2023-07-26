@@ -6,7 +6,7 @@ import {
   effect,
   signal,
   computed,
-  ViewChild, Signal, Output, EventEmitter
+  ViewChild, Signal, Output, EventEmitter, inject
 } from '@angular/core';
 import { Todo } from '../models/todo';
 import { inputSignal } from "../../../shared/utils/input-signal";
@@ -15,6 +15,8 @@ import { CounterComponent } from "../../../shared/components/counter/counter.com
 import { ButtonAction } from "../../../shared/components/button/types/button-action";
 import { ButtonActionsFn } from "../../../shared/components/button/types/button-actions-fn";
 import { whenInputChange } from "../../../shared/utils/when-input-change";
+import { TimeHelpers } from '../../../shared/utils/time-helpers';
+import { TodoTimerService } from '../todo-timer.service';
 
 @WithSignals()
 @Component({
@@ -24,23 +26,12 @@ import { whenInputChange } from "../../../shared/utils/when-input-change";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoTimeComponent {
-  @ViewChild(CounterComponent, {static: true}) counter!: CounterComponent;
   @Output() timeSpent = new EventEmitter<number>();
   @Input({required: true}) currentTodo!: Todo;
-  @Input() restTime = 5 * 60;
-  @Input() workTime = 25 * 60;
 
-  isRest = signal(false);
-  currentCycle = signal(0);
+  protected counter = inject(TodoTimerService);
 
-  currentTodoSignal = whenInputChange(this, "currentTodo", () => {
-    this.counter.restart();
-  });
-
-  emitTimeSpent = effect(() => {
-    const time = (this.currentCycle() * (this.restTime * this.workTime))
-    this.timeSpent.emit(time);
-  })
+  protected timeFormatted = computed(() => TimeHelpers.secondsToTime(this.counter.currentTime()))
 
   actionsFn: Signal<ButtonActionsFn> = computed(() => {
     return () => [
@@ -49,7 +40,7 @@ export class TodoTimeComponent {
         click: () => {
           this.counter.pause();
         },
-        condition: this.counter?.isCounting(),
+        condition: !this.counter?.isPaused(),
         options: {
           text: "Pausar",
           icon: "pause",
@@ -59,9 +50,9 @@ export class TodoTimeComponent {
       {
         type: "raised",
         click: () => {
-          this.counter.play();
+          this.counter.resume();
         },
-        condition: !this.counter?.isCounting(),
+        condition: this.counter?.isPaused(),
         options: {
           text: "Continuar",
           icon: "play_arrow",
@@ -70,15 +61,4 @@ export class TodoTimeComponent {
       }
     ];
   })
-
-  protected timeCount = computed(() => {
-    return this.isRest() ? this.restTime : this.workTime;
-  })
-
-  protected onFinish() {
-    if (this.isRest()) {
-      this.isRest.set(false);
-      this.currentCycle.update(cycle => cycle + 1);
-    } else this.isRest.set(true);
-  }
 }

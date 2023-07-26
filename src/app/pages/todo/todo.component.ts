@@ -30,7 +30,7 @@ export class TodoComponent implements OnInit {
       {
         type: "icon",
         click: () => this.focus(todo),
-        condition: this.todoInFocus()?.id !== todo.id,
+        condition: !todo.inFocus,
         options: {
           color: "primary",
           icon: "play_circle"

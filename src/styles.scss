@@ -20,9 +20,23 @@ body {
   }
 }
 
-:root{
+:root {
   --color-primary: 63, 81, 181;
   --color-secondary: #205DE1;
-  --color-background: #d3def5;
-  --border:  solid 1px rgba(128, 128, 128, 0.52);
+  --color-background: white;
+  --border: solid 1px rgba(128, 128, 128, 0.52);
+}
+
+.rounded-box {
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 5px;
+  padding: .5rem .5rem;
+  border-bottom: var(--border);
+}
+
+.separator{
+  width: 100%;
+  border: var(--border);
 }

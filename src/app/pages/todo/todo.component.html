@@ -3,15 +3,12 @@
   [currentTodo]="inFocus"
 />
 
-<div class="todo-in-focus" *ngIf="todoInFocus() as inFocus">
-  <app-todo-item
-    class="mat-elevation-z1"
-    (toggle)="toggle($event)"
-    [actionsFn]="actionsFn()"
-    [item]="inFocus"
-  >
-  </app-todo-item>
-</div>
+<app-todo-in-focus
+  *ngIf="todoInFocus() as inFocus"
+  (toggle)="toggle($event)"
+  [actionsFn]="actionsFn()"
+  [current]="inFocus"
+/>
 
 <app-actions-container
   alignment="right"

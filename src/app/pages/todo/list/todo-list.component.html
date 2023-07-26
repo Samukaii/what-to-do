@@ -2,8 +2,14 @@
   cdkDropList
   (cdkDropListDropped)="reorder.emit($event)"
   *ngIf="!!items.length; else noResults">
-  <li *ngFor="let item of items">
-    <app-todo-item (toggle)="toggle.emit($event)" [item]="item" [actionsFn]="actionsFn" cdkDrag/>
+  <li
+    cdkDrag
+    class="rounded-box"
+    *ngFor="let item of items">
+    <app-todo-item
+      (toggle)="toggle.emit($event)"
+      [item]="item" [actionsFn]="actionsFn"
+      />
   </li>
 </ul>
 

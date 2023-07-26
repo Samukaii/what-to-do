@@ -1,0 +1,13 @@
+:host{
+  display: flex;
+  gap: .5rem;
+
+  mat-icon{
+    color: rgba(var(--color-primary), .5);
+
+    &.completed {
+      color: rgb(var(--color-primary));
+    }
+  }
+
+}

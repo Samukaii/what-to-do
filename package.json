@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "deploy": "ng build && cd ./dist/todo && surge",
+    "deploy": "ng build && cd ./dist/todo && surge . samuel-todo.surge.sh",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

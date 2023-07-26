@@ -1,0 +1,21 @@
+<div
+  class="rounded-box"
+
+>
+  <app-todo-item
+    (toggle)="toggle.emit($event)"
+    [actionsFn]="actionsFn"
+    [item]="current"
+  >
+  </app-todo-item>
+
+  <!--    <hr class="separator">-->
+
+
+  <app-cycles-counter
+    [total]="4"
+    [completed]="3"
+  >
+
+  </app-cycles-counter>
+</div>
