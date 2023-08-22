@@ -26,19 +26,22 @@ import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
 import { SecondsToTimePipe } from "../../shared/pipes/seconds-to-time.pipe";
 import { CyclesCounterComponent } from "../../shared/components/cycles-counter/cycles-counter.component";
 import { TodoInFocusComponent } from './in-focus/todo-in-focus.component';
+import { PoppoverDirective } from "../../shared/directives/poppover.directive";
+import { TodoInfoComponent } from "./info/todo-info.component";
 
 
 @NgModule({
-  declarations: [
-    TodoInFocusComponent,
-    TodoFormComponent,
-    TodoUpdateComponent,
-    TodoListComponent,
-    TodoComponent,
-    TodoItemComponent,
-    TodoCreateComponent,
-    TodoTimeComponent
-  ],
+    declarations: [
+        TodoInFocusComponent,
+        TodoFormComponent,
+        TodoUpdateComponent,
+        TodoListComponent,
+        TodoComponent,
+        TodoItemComponent,
+        TodoCreateComponent,
+        TodoTimeComponent,
+        TodoInfoComponent
+    ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -59,7 +62,8 @@ import { TodoInFocusComponent } from './in-focus/todo-in-focus.component';
         CdkDropList,
         CdkDrag,
         SecondsToTimePipe,
-        CyclesCounterComponent
+        CyclesCounterComponent,
+        PoppoverDirective
     ]
 })
 export class TodoModule {

@@ -9,5 +9,4 @@ export class SecondsToTimePipe implements PipeTransform {
   transform(value: number): string {
     return TimeHelpers.secondsToTime(value);
   }
-
 }

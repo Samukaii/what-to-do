@@ -1,12 +1,12 @@
-import {Component, computed, HostListener, inject, OnInit, Signal, signal} from '@angular/core';
-import {TodoService} from "./todo.service";
-import {Todo} from "./models/todo";
-import {ButtonAction} from "../../shared/components/button/types/button-action";
-import {DialogService} from "../../shared/services/dialog.service";
-import {TodoUpdateComponent} from "./update/todo-update.component";
-import {TodoCreateComponent} from "./create/todo-create.component";
+import { Component, computed, HostListener, inject, OnInit } from '@angular/core';
+import { TodoService } from "./todo.service";
+import { Todo } from "./models/todo";
+import { ButtonAction } from "../../shared/components/button/types/button-action";
+import { DialogService } from "../../shared/services/dialog.service";
+import { TodoUpdateComponent } from "./update/todo-update.component";
+import { TodoCreateComponent } from "./create/todo-create.component";
 import { ButtonActionsFn } from "../../shared/components/button/types/button-actions-fn";
-import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
+import { CdkDragDrop } from "@angular/cdk/drag-drop";
 
 
 @Component({
@@ -105,13 +105,5 @@ export class TodoComponent implements OnInit {
         onSend: changes => this.service.create(changes)
       }
     })
-  }
-
-  updateTimeSpent(timeSpent: number){
-    const inFocus = this.todoInFocus();
-
-    if(!inFocus) return;
-
-    this.service.registerTime(inFocus.id, timeSpent)
   }
 }

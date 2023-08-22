@@ -5,10 +5,11 @@ export const writableInputSignal = <T, K extends keyof T>(component: T, key: K):
   const signalProperty = signal(component[key]);
 
   if(!onChanges)
-    throw new Error("inputSignal can only be used if the component has the \"WithSignals\" decorator");
+    throw new Error("inputSignal can only be used if the component has the \"@WithSignals()\" decorator");
 
   (component as any).ngOnChanges = (changes: SimpleChanges) => {
     if(changes?.[key as string]){
+      if(changes?.[key as string].previousValue !== changes?.[key as string].currentValue)
       signalProperty.set(component[key])
     }
 

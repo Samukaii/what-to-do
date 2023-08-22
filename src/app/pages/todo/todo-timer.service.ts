@@ -1,78 +1,51 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { generateId } from 'src/app/shared/utils/id-generator';
-import { TodoForm } from './models/todo-form';
-import { Todo } from './models/todo';
-import { FormValue } from "../../shared/types/form-value";
-import { TrashService } from "../../shared/services/trash.service";
-import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
-
-type CounterType = 'work' | 'short-rest' | 'long-rest';
+import { TodoTimerHelperService } from "./todo-timer-helper.service";
+import { TodoTimerStorageService } from "./todo-timer-storage.service";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class TodoTimerService {
-  counterType = signal<CounterType>('work');
-  isPaused = signal(true);
-  currentCounterSize = computed(() => {
-    switch (this.counterType()) {
-      case "work":
-        return 25 * 60;
-      case "short-rest":
-        return 5 * 60;
-      case "long-rest":
-        return 15 * 60;
-    }
-  });
-  currentTime = signal(this.currentCounterSize());
-  private cycles = signal(0);
-  private intervalId = 0;
+    isPaused = signal(true);
+    allTimeSpent = signal(0);
+    currentTodoId?: number;
 
-  resume() {
-    const oneSecond = 1000;
-    this.isPaused.set(false);
+    saveOnStorage = effect(() => {
+        this.updateStorage(this.allTimeSpent());
+    })
 
-    this.intervalId = setInterval(this.updateCounter, oneSecond)
-  }
+    private helper = inject(TodoTimerHelperService);
+    private storage = inject(TodoTimerStorageService);
 
-  reset() {
-    clearInterval(this.intervalId);
-    this.isPaused.set(true);
-    this.currentTime.set(this.currentCounterSize());
-  }
+    currentCounterDecrescent = computed(() => this.helper.currentCounterDecrescent(this.allTimeSpent()));
+    currentTotalCounter = computed(() => this.helper.currentTotalCounter(this.allTimeSpent()));
+    cycles = computed(() => this.helper.getCyclesCount(this.allTimeSpent()));
 
-  pause() {
-    clearInterval(this.intervalId);
-    this.isPaused.set(true);
-  }
+    private intervalId = 0;
 
-  private updateCounter = () => {
-    this.currentTime.update(current => {
-      return current - 1;
-    });
-    this.verifyCycleEnd();
-  }
 
-  private verifyCycleEnd() {
-    if (this.currentTime() <= 0) {
-      this.nextCounterType();
-      this.reset();
-    }
-  }
+    resume() {
+        const oneSecond = 1000;
+        this.isPaused.set(false);
 
-  private nextCounterType() {
-    if (this.counterType() === "short-rest" || this.counterType() === "long-rest") {
-      this.counterType.set("work");
-      return;
+        this.intervalId = setInterval(this.updateCounter, oneSecond)
     }
 
-    if (this.isAtCycleEnd()) this.counterType.set("long-rest");
-    else this.counterType.set("short-rest");
-  }
+    restart(todoId: number) {
+        this.currentTodoId = todoId;
+        clearInterval(this.intervalId);
+        this.isPaused.set(true);
+        this.allTimeSpent.set(this.storage.get(todoId) ?? 0);
+    }
 
-  private isAtCycleEnd() {
-    const maxCycleSize = 4;
+    pause() {
+        clearInterval(this.intervalId);
+        this.isPaused.set(true);
+    }
 
-    return this.cycles() % maxCycleSize === 0;
-  }
+    private updateCounter = () => {
+        if(!this.currentTodoId) throw new Error("currentTodoId needs to be setted");
+        this.allTimeSpent.update(current => current + 1);
+        this.storage.save(this.currentTodoId, this.allTimeSpent());
+    }
 }

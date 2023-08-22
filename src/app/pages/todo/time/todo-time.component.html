@@ -1,10 +1,10 @@
 
 <app-clock
-  [allTimeInSeconds]="counter.currentCounterSize() / 60"
-  [currentSeconds]="counter.currentTime() / 60"
+  [allTimeInSeconds]="counter.currentTotalCounter() / 60"
+  [currentSeconds]="currentCounter() / 60"
 >
   <div class="time">
-    {{timeFormatted()}}
+    {{counter.currentCounterDecrescent() | secondsToTime}}
   </div>
 </app-clock>
 

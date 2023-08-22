@@ -1,6 +1,6 @@
 <div class="clock">
     <div
-      [style.transform]="'rotateZ(' + (360 / allTimeInSecondsSignal()) * i + 'deg)'"
+      [style.transform]="'rotateZ(' + (360 / inputs.allTimeInSeconds()) * i + 'deg)'"
       *ngFor="let indicator of indicators(); let i = index" class="clock__indicator"
     ></div>
 
@@ -9,7 +9,6 @@
     >
       <div class="arrow">
       </div>
-
     </div>
 
 

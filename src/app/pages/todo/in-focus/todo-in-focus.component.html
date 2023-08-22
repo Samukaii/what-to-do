@@ -1,21 +1,26 @@
 <div
   class="rounded-box"
-
+  appPoppover
+  [poppoverComponent]="poppoverComponent"
+  (mouseenter)="showInfo()"
+  (mouseleave)="closeInfo()"
 >
+
   <app-todo-item
     (toggle)="toggle.emit($event)"
     [actionsFn]="actionsFn"
     [item]="current"
   >
+    <div class="time-spent" right>
+      <strong>
+        Total:
+      </strong>
+      <p>
+      {{timer.allTimeSpent() | secondsToTime}}
+      </p>
+    </div>
   </app-todo-item>
 
-  <!--    <hr class="separator">-->
+  <mat-icon class="material-icons-outlined">info</mat-icon>
 
-
-  <app-cycles-counter
-    [total]="4"
-    [completed]="3"
-  >
-
-  </app-cycles-counter>
 </div>

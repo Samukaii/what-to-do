@@ -5,6 +5,7 @@ import { Todo } from './models/todo';
 import { FormValue } from "../../shared/types/form-value";
 import { TrashService } from "../../shared/services/trash.service";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
+import { TodoTimerService } from "./todo-timer.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class TodoService {
   todos = signal(this.getStorage());
   private trashKey = "todos";
   private trash = inject(TrashService);
+  private timer = inject(TodoTimerService);
 
   saveOnStorage = effect(() => {
     localStorage.setItem('list', JSON.stringify(this.todos()))
@@ -68,19 +70,6 @@ export class TodoService {
     });
   }
 
-  registerTime(id: number, seconds: number){
-    this.todos.update(todos => {
-      return todos.map(todo => {
-        if(todo.id !== id) return todo;
-
-        return {
-          ...todo,
-          timeSpent: todo.timeSpent + seconds
-        }
-      })
-    })
-  }
-
   create(value: FormValue<TodoForm>) {
     const { title, description, cycles } = value;
     if (!title) return;
@@ -96,7 +85,11 @@ export class TodoService {
     }, ...items]);
   }
 
+  currentInFocus = () => this.todos().find(todo => todo.inFocus);
+
   focus(id: number){
+    this.saveTimeSpent();
+
     this.todos.update(todos => {
       return todos.map(todo => {
         if(todo.id !== id) return {
@@ -109,7 +102,9 @@ export class TodoService {
           inFocus: true
         }
       })
-    })
+    });
+
+    this.timer.restart(this.currentInFocus()!.id)
   }
 
   update(id: number, changes: Partial<FormValue<TodoForm>>){
@@ -124,6 +119,17 @@ export class TodoService {
           }
         })
       })
+  }
+
+  private saveTimeSpent() {
+    this.todos.update(todos => todos.map(todo => {
+      if(!todo.inFocus) return todo;
+
+      return {
+        ...todo,
+        timeSpent: this.timer.allTimeSpent()
+      }
+    }));
   }
 
   private getStorage(): Todo[] {

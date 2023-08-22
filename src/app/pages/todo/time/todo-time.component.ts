@@ -1,24 +1,17 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  SimpleChanges,
-  effect,
-  signal,
-  computed,
-  ViewChild, Signal, Output, EventEmitter, inject
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    EventEmitter,
+    inject,
+    Input,
+    Output,
+    Signal
 } from '@angular/core';
 import { Todo } from '../models/todo';
-import { inputSignal } from "../../../shared/utils/input-signal";
-import { WithSignals } from "../../../shared/decorators/with-signals";
-import { CounterComponent } from "../../../shared/components/counter/counter.component";
-import { ButtonAction } from "../../../shared/components/button/types/button-action";
 import { ButtonActionsFn } from "../../../shared/components/button/types/button-actions-fn";
-import { whenInputChange } from "../../../shared/utils/when-input-change";
-import { TimeHelpers } from '../../../shared/utils/time-helpers';
 import { TodoTimerService } from '../todo-timer.service';
 
-@WithSignals()
 @Component({
   selector: 'app-todo-time',
   templateUrl: './todo-time.component.html',
@@ -31,7 +24,7 @@ export class TodoTimeComponent {
 
   protected counter = inject(TodoTimerService);
 
-  protected timeFormatted = computed(() => TimeHelpers.secondsToTime(this.counter.currentTime()))
+  currentCounter = computed(() => this.counter.currentCounterDecrescent());
 
   actionsFn: Signal<ButtonActionsFn> = computed(() => {
     return () => [

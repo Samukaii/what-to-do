@@ -1,8 +1,8 @@
 :host {
   display: block;
-  border: solid 1px rgba(var(--color-primary), .2);
+  border: solid 1px rgba(var(--color-primary));
   border-radius: 100%;
-  padding: 1rem;
+  padding: .5rem;
 }
 
 $black: #1b1e23;
