@@ -2,18 +2,33 @@ import { ChangeDetectionStrategy, Component, computed, HostBinding, inject } fro
 import { Todo } from "../models/todo";
 import { TodoTimerHelperService } from "../todo-timer-helper.service";
 import { TodoTimerStorageService } from "../todo-timer-storage.service";
+import { animate, state, style, transition, trigger } from "@angular/animations";
 
 @Component({
 	selector: 'app-todo-info',
 	templateUrl: './todo-info.component.html',
 	styleUrls: ['./todo-info.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	animations: [
+		trigger('flyInOut', [
+			state('in', style({ opacity: 0 })),
+			transition(':enter', [
+				style({ opacity: 0 }),
+				animate(100)
+			]),
+			transition(':leave', [
+				animate(200, style({ opacity: 0 }))
+			])
+		])
+	]
 })
 export class TodoInfoComponent {
 	todo!: Todo;
 
 	helper = inject(TodoTimerHelperService);
 	storage = inject(TodoTimerStorageService);
+
+	@HostBinding('@flyInOut') animation = true;
 
 	allTime = computed(() => {
 		return this.storage.allTimeSpents()[this.todo.id] ?? 0;

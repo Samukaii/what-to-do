@@ -1,4 +1,4 @@
-import { Component, computed, HostListener, inject, OnInit } from '@angular/core';
+import { Component, computed, HostListener, inject } from '@angular/core';
 import { TodoService } from "./todo.service";
 import { Todo } from "./models/todo";
 import { ButtonAction } from "../../shared/components/button/types/button-action";
@@ -13,7 +13,7 @@ import { CdkDragDrop } from "@angular/cdk/drag-drop";
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss']
 })
-export class TodoComponent implements OnInit {
+export class TodoComponent {
   service = inject(TodoService);
   todoInFocus = computed(() => {
     return this.service.todos().find(todo => todo.inFocus);
@@ -68,10 +68,6 @@ export class TodoComponent implements OnInit {
   @HostListener('window:keydown.control.z')
   recover(){
     this.service.recover();
-  }
-
-  ngOnInit() {
-    this.service.focus(this.service.todos()[0].id)
   }
 
   focus(todo: Todo) {

@@ -8,133 +8,133 @@ import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { TodoTimerService } from "./todo-timer.service";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class TodoService {
-  todos = signal(this.getStorage());
-  private trashKey = "todos";
-  private trash = inject(TrashService);
-  private timer = inject(TodoTimerService);
+	todos = signal(this.getStorage());
+	private trashKey = "todos";
+	private trash = inject(TrashService);
+	private timer = inject(TodoTimerService);
 
-  saveOnStorage = effect(() => {
-    localStorage.setItem('list', JSON.stringify(this.todos()))
-  })
+	saveListOnStorage = effect(() => {
+		localStorage.setItem('list', JSON.stringify(this.todos()))
+	})
 
-  delete(todo: Todo) {
-    this.todos.update(todos => todos.filter((item, index) => {
-      if(item.id === todo.id)
-        this.trash.moveToTrash(this.trashKey, {
-          item: todo,
-          metadata: {
-            index
-          }
-        });
+	delete(todo: Todo) {
+		this.todos.update(todos => todos.filter((item, index) => {
+			if(item.id === todo.id)
+				this.trash.moveToTrash(this.trashKey, {
+					item: todo,
+					metadata: {
+						index
+					}
+				});
 
-      return item.id !== todo.id
-    }));
-  }
+			return item.id !== todo.id
+		}));
+	}
 
-  toggle(todo: Todo) {
-    this.todos.update(todos => todos.map(item => {
-      if (item.id !== todo.id) return item
+	toggle(todo: Todo) {
+		this.todos.update(todos => todos.map(item => {
+			if(item.id !== todo.id) return item
 
-      return {
-        ...item,
-        completed: !item.completed
-      }
-    }))
-  }
+			return {
+				...item,
+				completed: !item.completed
+			}
+		}))
+	}
 
-  reorder(event: CdkDragDrop<Todo>){
-    const inFocus = this.todos().find(todo => todo.inFocus);
-    const notInFocus = this.todos().filter(todo => !todo.inFocus)
-    const result: Todo[] = [...notInFocus];
+	reorder(event: CdkDragDrop<Todo>) {
+		const inFocus = this.todos().find(todo => todo.inFocus);
+		const notInFocus = this.todos().filter(todo => !todo.inFocus)
+		const result: Todo[] = [...notInFocus];
 
-    moveItemInArray(result, event.previousIndex, event.currentIndex);
+		moveItemInArray(result, event.previousIndex, event.currentIndex);
 
-    if(inFocus) result.unshift(inFocus);
+		if(inFocus) result.unshift(inFocus);
 
-    this.todos.set(result);
-  }
+		this.todos.set(result);
+	}
 
-  recover(){
-    const deleted = this.trash.recoverLast<Todo, {index: number}>(this.trashKey);
+	recover() {
+		const deleted = this.trash.recoverLast<Todo, { index: number }>(this.trashKey);
 
-    if(!deleted) return;
+		if(!deleted) return;
 
-    this.todos.update(todos => {
-      const newTodos = [...todos];
-      newTodos.splice(deleted.metadata!.index, 0, deleted.item);
+		this.todos.update(todos => {
+			const newTodos = [...todos];
+			newTodos.splice(deleted.metadata!.index, 0, deleted.item);
 
-      return newTodos;
-    });
-  }
+			return newTodos;
+		});
+	}
 
-  create(value: FormValue<TodoForm>) {
-    const { title, description, cycles } = value;
-    if (!title) return;
+	create(value: FormValue<TodoForm>) {
+		const { title, description, cycles } = value;
+		if(!title) return;
 
-    this.todos.update(items => [{
-      id: generateId(),
-      title,
-      cycles,
-      description: description ?? "",
-      completed: false,
-      inFocus: false,
-      timeSpent: 0
-    }, ...items]);
-  }
+		this.todos.update(items => [{
+			id: generateId(),
+			title,
+			cycles,
+			description: description ?? "",
+			completed: false,
+			inFocus: false,
+			timeSpent: 0
+		}, ...items]);
+	}
 
-  currentInFocus = () => this.todos().find(todo => todo.inFocus);
+	currentInFocus = () => this.todos().find(todo => todo.inFocus);
 
-  focus(id: number){
-    this.saveTimeSpent();
+	focus(id: number) {
+		this.saveTimeSpent();
 
-    this.todos.update(todos => {
-      return todos.map(todo => {
-        if(todo.id !== id) return {
-          ...todo,
-          inFocus: false
-        };
+		this.todos.update(todos => {
+			return todos.map(todo => {
+				if(todo.id !== id) return {
+					...todo,
+					inFocus: false
+				};
 
-        return {
-          ...todo,
-          inFocus: true
-        }
-      })
-    });
+				return {
+					...todo,
+					inFocus: true
+				}
+			})
+		});
 
-    this.timer.restart(this.currentInFocus()!.id)
-  }
+		this.timer.restart(this.currentInFocus()!.id)
+	}
 
-  update(id: number, changes: Partial<FormValue<TodoForm>>){
-      this.todos.update(todos => {
-        return todos.map(todo => {
-          if(todo.id !== id) return todo;
+	update(id: number, changes: Partial<FormValue<TodoForm>>) {
+		this.todos.update(todos => {
+			return todos.map(todo => {
+				if(todo.id !== id) return todo;
 
-          return {
-            ...todo,
-            ...changes,
-            description: changes.description ?? ""
-          }
-        })
-      })
-  }
+				return {
+					...todo,
+					...changes,
+					description: changes.description ?? ""
+				}
+			})
+		})
+	}
 
-  private saveTimeSpent() {
-    this.todos.update(todos => todos.map(todo => {
-      if(!todo.inFocus) return todo;
+	private saveTimeSpent() {
+		this.todos.update(todos => todos.map(todo => {
+			if(!todo.inFocus) return todo;
 
-      return {
-        ...todo,
-        timeSpent: this.timer.allTimeSpent()
-      }
-    }));
-  }
+			return {
+				...todo,
+				timeSpent: this.timer.allTimeSpent()
+			}
+		}));
+	}
 
-  private getStorage(): Todo[] {
-    const fromStorage = localStorage.getItem('list') || "[]";
+	private getStorage(): Todo[] {
+		const fromStorage = localStorage.getItem('list') || "[]";
 
-    return JSON.parse(fromStorage);
-  }
+		return JSON.parse(fromStorage);
+	}
 }

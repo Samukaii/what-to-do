@@ -57,6 +57,12 @@ export class PoppoverDirective<T> {
                     overlayX: 'end',
                     overlayY: 'top',
                 },
+				{
+					originX: 'end',
+					originY: 'top',
+					overlayX: 'end',
+					overlayY: 'bottom',
+				},
             ]);
     }
 

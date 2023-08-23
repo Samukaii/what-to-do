@@ -12,10 +12,17 @@
         Tempo estimado:
     </strong>
     <div>
-        <p>
-            {{todo.cycles}} ciclos ({{timeEstimated(todo) | secondsToTime}})
-        </p>
-
+		<p >
+			<ng-container [ngPlural]="todo.cycles">
+				<ng-template ngPluralCase="=1">
+					{{todo.cycles}} ciclo
+				</ng-template>
+				<ng-template ngPluralCase="other">
+					{{ todo.cycles }} ciclos
+				</ng-template>
+			</ng-container>
+			({{timeEstimated(todo) | secondsToTime}})
+		</p>
     </div>
 </div>
 
