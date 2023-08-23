@@ -13,6 +13,16 @@ ul {
   padding: 0;
 }
 
+.todo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  app-todo-item {
+    width: 100%;
+  }
+}
+
 app-todo-item {
   cursor: move;
 }

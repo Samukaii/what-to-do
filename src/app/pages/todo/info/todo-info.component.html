@@ -1,1 +1,29 @@
-{{todo.title}}
+<div class="info">
+    <strong>
+        Total:
+    </strong>
+    <p>
+        {{allTime() | secondsToTime}}
+    </p>
+</div>
+
+<div class="info estimated">
+    <strong>
+        Tempo estimado:
+    </strong>
+    <div>
+        <p>
+            {{todo.cycles}} ciclos ({{timeEstimated(todo) | secondsToTime}})
+        </p>
+
+    </div>
+</div>
+
+<div class="info">
+    <strong>
+        Tempo gasto:
+    </strong>
+    <p>
+        {{timeWorked() | secondsToTime}}
+    </p>
+</div>

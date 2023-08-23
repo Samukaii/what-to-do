@@ -10,8 +10,15 @@ export class TodoTimerHelperService {
         return Math.floor(this.workTimeSpent(timeInSeconds) / (25 * 60));
     }
 
+    getCyclesTime(cycles: number) {
+        const completed = Math.floor(cycles / 4);
+        const remaining = cycles % 4;
+
+        return completed * 130 + remaining * 30;
+    }
+
     currentTotalCounterByStepName(stepName: StepName) {
-        switch (stepName) {
+        switch(stepName) {
             case "work":
                 return 25 * 60;
             case "short-rest":
@@ -27,7 +34,7 @@ export class TodoTimerHelperService {
     }
 
     currentCounterDecrescent(timeInSeconds: number) {
-        switch (this.currentStepName(timeInSeconds)) {
+        switch(this.currentStepName(timeInSeconds)) {
             case "short-rest":
                 return (5 * 60) - (this.shortRestTimeSpent(timeInSeconds) % (5 * 60));
             case "work":
@@ -66,9 +73,9 @@ export class TodoTimerHelperService {
         const completeShortCycle = 30;
         const shortCycleBeforeShortRest = 25;
 
-        if (all % completeLongCycle >= longCycleBeforeLongRest) return "long-rest";
+        if(all % completeLongCycle >= longCycleBeforeLongRest) return "long-rest";
 
-        if ((all % completeLongCycle) % completeShortCycle >= shortCycleBeforeShortRest) return "short-rest";
+        if((all % completeLongCycle) % completeShortCycle >= shortCycleBeforeShortRest) return "short-rest";
 
         return "work";
     }

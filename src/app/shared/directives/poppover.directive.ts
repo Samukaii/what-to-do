@@ -2,6 +2,10 @@ import { Directive, ElementRef, Input, Type } from "@angular/core";
 import { Overlay, OverlayRef, PositionStrategy } from "@angular/cdk/overlay";
 import { ComponentPortal } from "@angular/cdk/portal";
 
+export interface PoppoverConfig {
+	origin: ElementRef | HTMLElement;
+}
+
 @Directive({
     selector: '[appPoppover]',
     standalone: true
@@ -17,11 +21,11 @@ export class PoppoverDirective<T> {
     ) {
     }
 
-    open(info: Partial<T>) {
+    open(info: Partial<T>, config?: PoppoverConfig) {
         this.overlayRef = this.overlay.create({
             hasBackdrop: false,
             disposeOnNavigation: true,
-            positionStrategy: this.getOverlayPosition(this.elementRef),
+            positionStrategy: this.getOverlayPosition(config?.origin ?? this.elementRef),
             scrollStrategy: this.overlay.scrollStrategies.close()
 
         });
@@ -42,7 +46,7 @@ export class PoppoverDirective<T> {
         this.overlayRef?.detach();
     }
 
-    private getOverlayPosition(origin: ElementRef): PositionStrategy {
+    private getOverlayPosition(origin: ElementRef | HTMLElement): PositionStrategy {
         return this.overlay
             .position()
             .flexibleConnectedTo(origin)

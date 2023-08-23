@@ -1,4 +1,4 @@
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { TodoTimerHelperService } from "./todo-timer-helper.service";
 import { TodoTimerStorageService } from "./todo-timer-storage.service";
 
@@ -9,10 +9,6 @@ export class TodoTimerService {
     isPaused = signal(true);
     allTimeSpent = signal(0);
     currentTodoId?: number;
-
-    saveOnStorage = effect(() => {
-        this.updateStorage(this.allTimeSpent());
-    })
 
     private helper = inject(TodoTimerHelperService);
     private storage = inject(TodoTimerStorageService);
@@ -25,7 +21,7 @@ export class TodoTimerService {
 
 
     resume() {
-        const oneSecond = 1000;
+        const oneSecond = 1;
         this.isPaused.set(false);
 
         this.intervalId = setInterval(this.updateCounter, oneSecond)
