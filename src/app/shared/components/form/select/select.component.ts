@@ -4,22 +4,22 @@ import { ControlContainer, FormGroup, ReactiveFormsModule } from '@angular/forms
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { BaseSelect } from "../../../models/base-select";
+import { MatSelectModule } from "@angular/material/select";
 
 @Component({
-	selector: 'app-textarea',
-	templateUrl: './textarea.component.html',
-	styleUrls: ['./textarea.component.scss'],
+	selector: 'app-select',
+	templateUrl: './select.component.html',
+	styleUrls: ['./select.component.scss'],
 	standalone: true,
-	imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule, CommonModule],
+	imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule, CommonModule, MatSelectModule],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TextareaComponent implements OnInit {
+export class SelectComponent implements OnInit {
 	@Input({ required: true }) name!: string;
 	@Input() label?: string;
 	@Input() placeholder?: string;
-	@Input() rows = 2;
-	@Input() hint?: string;
-	@Input() icon?: string;
+	@Input() options: BaseSelect[] = [];
 
 	container = inject(ControlContainer);
 	form!: FormGroup;

@@ -6,13 +6,13 @@ import { DynamicComponentComponent } from '../dynamic-component/dynamic-componen
 import { Tab } from './models/tab';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss'],
-  imports: [CommonModule, MatTabsModule, MatIconModule, DynamicComponentComponent],
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush
+	selector: 'app-tabs',
+	templateUrl: './tabs.component.html',
+	styleUrls: ['./tabs.component.scss'],
+	imports: [CommonModule, MatTabsModule, MatIconModule, DynamicComponentComponent],
+	standalone: true,
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabsComponent {
-  @Input() tabs: Tab[] = [];
+	@Input() tabs: Tab[] = [];
 }

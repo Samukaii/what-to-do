@@ -1,24 +1,24 @@
 <app-todo-time
-  *ngIf="todoInFocus() as inFocus"
-  [currentTodo]="inFocus"
+	*ngIf="todoInFocus() as inFocus"
+	[currentTodo]="inFocus"
 />
 
 <app-todo-in-focus
-  *ngIf="todoInFocus() as inFocus"
-  (toggle)="toggle($event)"
-  [actionsFn]="actionsFn()"
-  [current]="inFocus"
+	(toggle)="toggle($event)"
+	*ngIf="todoInFocus() as inFocus"
+	[actionsFn]="actionsFn()"
+	[current]="inFocus"
 />
 
 <app-actions-container
-  alignment="right"
-  [actionsFn]="createButtonFn"
+	[actionsFn]="createButtonFn"
+	alignment="right"
 />
 
 
 <app-todo-list
-  (reorder)="reorder($event)"
-  (toggle)="toggle($event)"
-  [items]="otherTodos()"
-  [actionsFn]="actionsFn()"
+	(reorder)="reorder($event)"
+	(toggle)="toggle($event)"
+	[actionsFn]="actionsFn()"
+	[items]="otherTodos()"
 />

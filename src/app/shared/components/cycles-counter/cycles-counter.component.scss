@@ -1,15 +1,15 @@
-:host{
-  display: flex;
-  gap: .5rem;
-  flex-wrap: nowrap;
-  width: 100%;
+:host {
+	display: flex;
+	gap: .5rem;
+	flex-wrap: nowrap;
+	width: 100%;
 
-  mat-icon{
-    color: rgba(var(--color-primary), .5);
+	mat-icon {
+		color: rgba(var(--color-primary), .5);
 
-    &.completed {
-      color: rgb(var(--color-primary));
-    }
-  }
+		&.completed {
+			color: rgb(var(--color-primary));
+		}
+	}
 
 }

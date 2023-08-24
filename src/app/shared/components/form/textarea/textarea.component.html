@@ -1,13 +1,13 @@
 <ng-container [formGroup]="form">
-  <mat-form-field appearance="outline">
-    <mat-label>{{label}}</mat-label>
-    <textarea
-      matInput
-      [rows]="rows"
-      [placeholder]="placeholder || ''"
-      [formControlName]="name">
+	<mat-form-field appearance="outline">
+		<mat-label>{{label}}</mat-label>
+		<textarea
+			[formControlName]="name"
+			[placeholder]="placeholder || ''"
+			[rows]="rows"
+			matInput>
     </textarea>
-    <mat-icon *ngIf="icon" matSuffix>{{icon}}</mat-icon>
-    <mat-hint *ngIf="hint">{{hint}}</mat-hint>
-  </mat-form-field>
+		<mat-icon *ngIf="icon" matSuffix>{{icon}}</mat-icon>
+		<mat-hint *ngIf="hint">{{hint}}</mat-hint>
+	</mat-form-field>
 </ng-container>

@@ -1,64 +1,64 @@
 :host {
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
 
-  &.todo-completed {
-    filter: grayscale(.6) opacity(.5);
+	&.todo-completed {
+		filter: grayscale(.6) opacity(.5);
 
-    strong {
-      text-decoration: line-through;
-    }
-  }
+		strong {
+			text-decoration: line-through;
+		}
+	}
 }
 
 .container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: .5rem;
-  position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: .5rem;
+	position: relative;
 }
 
 .right {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	align-items: center;
+	justify-content: center;
 }
 
 .body {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
 
-  &__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: .5rem;
-  }
+	&__content {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: .5rem;
+	}
 
-  &__actions {
-    display: flex;
-  }
+	&__actions {
+		display: flex;
+	}
 
-  pre {
-    margin: 0;
-    white-space: pre-line;
-  }
+	pre {
+		margin: 0;
+		white-space: pre-line;
+	}
 
-  strong {
-    color: var(--color-primary);
-    font-size: 1rem;
-    font-weight: 500;
-  }
+	strong {
+		color: var(--color-primary);
+		font-size: 1rem;
+		font-weight: 500;
+	}
 }
 
 .mat-mdc-button-base {
-  width: 40px;
-  height: 40px;
-  padding: 5px;
+	width: 40px;
+	height: 40px;
+	padding: 5px;
 }

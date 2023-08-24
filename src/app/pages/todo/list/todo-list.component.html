@@ -1,22 +1,22 @@
 <ul
-		cdkDropList
-		(cdkDropListDropped)="reorder.emit($event)"
-		*ngIf="!!items.length; else noResults">
+	(cdkDropListDropped)="reorder.emit($event)"
+	*ngIf="!!items.length; else noResults"
+	cdkDropList>
 	<li
-			cdkDrag
-			class="rounded-box"
-			*ngFor="let item of items">
+		*ngFor="let item of items"
+		cdkDrag
+		class="rounded-box">
 		<div
-				class="todo"
-				#todo
-				appPoppover
-				[poppoverComponent]="poppoverComponent"
-				(mouseenter)="showInfo(item, todo)"
-				(mouseleave)="closeInfo()"
+			#todo
+			(mouseenter)="showInfo(item, todo)"
+			(mouseleave)="closeInfo()"
+			[poppoverComponent]="poppoverComponent"
+			appPoppover
+			class="todo"
 		>
 			<app-todo-item
-					(toggle)="toggle.emit($event)"
-					[item]="item" [actionsFn]="actionsFn"
+				(toggle)="toggle.emit($event)"
+				[actionsFn]="actionsFn" [item]="item"
 			/>
 			<mat-icon class="material-icons-outlined">info</mat-icon>
 		</div>
@@ -24,6 +24,6 @@
 </ul>
 
 <ng-template #noResults>
-	<app-no-results icon="format_list_bulleted" label="Nenhuma tarefa adicionada"
-									description="Adicione uma tarefa"/>
+	<app-no-results description="Adicione uma tarefa" icon="format_list_bulleted"
+					label="Nenhuma tarefa adicionada"/>
 </ng-template>

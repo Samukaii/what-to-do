@@ -1,35 +1,35 @@
 :host {
-  box-sizing: content-box;
-  margin-bottom: 2rem;
-  margin-top: 1rem;
+	box-sizing: content-box;
+	margin-bottom: 2rem;
+	margin-top: 1rem;
 }
 
 .time-spent {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
+	display: flex;
+	align-items: center;
+	gap: .5rem;
 
-  p {
-    margin: 0;
-  }
+	p {
+		margin: 0;
+	}
 
-  strong {
-    font-weight: 500;
-  }
+	strong {
+		font-weight: 500;
+	}
 
-  mat-icon {
-    color: rgb(var(--color-primary));
-    font-size: 1rem;
-    width: fit-content;
-    height: fit-content;
-  }
+	mat-icon {
+		color: rgb(var(--color-primary));
+		font-size: 1rem;
+		width: fit-content;
+		height: fit-content;
+	}
 }
 
 .rounded-box {
-  flex-direction: row;
-  align-items: center;
+	flex-direction: row;
+	align-items: center;
 
-  app-todo-item {
-    width: 100%;
-  }
+	app-todo-item {
+		width: 100%;
+	}
 }

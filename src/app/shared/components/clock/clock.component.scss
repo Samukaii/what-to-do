@@ -1,8 +1,8 @@
 :host {
-  display: block;
-  border: solid 1px rgba(var(--color-primary));
-  border-radius: 100%;
-  padding: .5rem;
+	display: block;
+	border: solid 1px rgba(var(--color-primary));
+	border-radius: 100%;
+	padding: .5rem;
 }
 
 $black: #1b1e23;
@@ -11,60 +11,60 @@ $white: #f4eed7;
 $feature: rgb(var(--color-primary));
 
 .arrow {
-  width: 0;
-  height: 0;
-  border-left: 2px solid transparent;
-  border-right: 2px solid transparent;
+	width: 0;
+	height: 0;
+	border-left: 2px solid transparent;
+	border-right: 2px solid transparent;
 
-  border-bottom: 130px solid #ff8989;
+	border-bottom: 130px solid #ff8989;
 
-  position: absolute;
-  top: 0;
-  left: -3px;
+	position: absolute;
+	top: 0;
+	left: -3px;
 }
 
 .clock {
-  width: $size;
-  aspect-ratio: 1/1;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  position: relative;
+	width: $size;
+	aspect-ratio: 1/1;
+	border-radius: 100%;
+	display: flex;
+	justify-content: center;
+	position: relative;
 
-  &__pointer {
-    position: absolute;
-    left: calc(50% - 1px);
-    width: 2px;
-    background: $white;
-    transform-origin: bottom center;
-    z-index: 2;
-    border-radius: 1px;
-    height: 50%;
-    background: none;
-    box-sizing: border-box;
-    transition: .5s;
-  }
+	&__pointer {
+		position: absolute;
+		left: calc(50% - 1px);
+		width: 2px;
+		background: $white;
+		transform-origin: bottom center;
+		z-index: 2;
+		border-radius: 1px;
+		height: 50%;
+		background: none;
+		box-sizing: border-box;
+		transition: .5s;
+	}
 
-  &__content {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+	&__content {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 
-  &__indicator {
-    position: absolute;
-    left: calc(50% - 1px);
-    width: 2px;
-    background: $white;
-    transform-origin: bottom center;
-    z-index: 2;
-    border-radius: 1px;
-    height: 50%;
-    border-top: 4px solid $feature;
-    background: none;
-    box-sizing: border-box;
-  }
+	&__indicator {
+		position: absolute;
+		left: calc(50% - 1px);
+		width: 2px;
+		background: $white;
+		transform-origin: bottom center;
+		z-index: 2;
+		border-radius: 1px;
+		height: 50%;
+		border-top: 4px solid $feature;
+		background: none;
+		box-sizing: border-box;
+	}
 }

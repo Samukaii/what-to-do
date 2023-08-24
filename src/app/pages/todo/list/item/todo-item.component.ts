@@ -4,19 +4,20 @@ import { ButtonActionsFn } from "../../../../shared/components/button/types/butt
 
 
 @Component({
-  selector: 'app-todo-item',
-  templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+	selector: 'app-todo-item',
+	templateUrl: './todo-item.component.html',
+	styleUrls: ['./todo-item.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoItemComponent {
-  @Output() toggle = new EventEmitter<Todo>();
-  @Input({ required: true }) item!: Todo
-  @Input() showTimeSpend = true;
-  @Input() actionsFn: ButtonActionsFn<Todo> = () => [];
+	@Output() toggle = new EventEmitter<Todo>();
+	@Input({ required: true }) item!: Todo
+	@Input() showTimeSpend = true;
 
-  @HostBinding("class.todo-completed")
-  get completed(){
-    return this.item.completed;
-  }
+	@HostBinding("class.todo-completed")
+	get completed() {
+		return this.item.completed;
+	}
+
+	@Input() actionsFn: ButtonActionsFn<Todo> = () => [];
 }

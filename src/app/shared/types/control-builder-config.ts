@@ -1,4 +1,4 @@
-import { ValidatorFn, AsyncValidatorFn, FormControlState } from "@angular/forms";
+import { AsyncValidatorFn, FormControlState, ValidatorFn } from "@angular/forms";
 
 type ValidatorConfig = ValidatorFn | AsyncValidatorFn | ValidatorFn[] | AsyncValidatorFn[];
 

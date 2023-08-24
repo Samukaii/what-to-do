@@ -1,24 +1,31 @@
 <app-form
-  [principalTitle]="principalTitle"
-  [formGroup]="form"
-  [actions]="actions"
+	[actions]="actions"
+	[formGroup]="form"
+	[principalTitle]="principalTitle"
 >
-  <app-input
-    name="title"
-    label="Nome"
-    placeholder="O que você precisa fazer agora?"
-  />
-  <app-textarea
-    name="description"
-    label="Descrição"
-    [rows]="5"
-    placeholder="Como você precisa fazer?"
-  />
+	<app-input
+		label="Nome"
+		name="title"
+		placeholder="O que você precisa fazer agora?"
+	/>
+	<app-textarea
+		[rows]="5"
+		label="Descrição"
+		name="description"
+		placeholder="Como você precisa fazer?"
+	/>
 
-  <app-input
-    name="cycles"
-    label="Quantos ciclos esta tarefa vai durar?"
-    type="number"
-    placeholder="O que você precisa fazer agora?"
-  />
+	<app-select
+		label="Prioridade"
+		name="priority"
+		placeholder="Qual o nível de prioridade desta tarefa?"
+		[options]="priorities"
+	/>
+
+	<app-input
+		label="Quantos ciclos esta tarefa vai durar?"
+		name="cycles"
+		placeholder="O que você precisa fazer agora?"
+		type="number"
+	/>
 </app-form>

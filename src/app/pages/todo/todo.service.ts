@@ -12,13 +12,12 @@ import { TodoTimerService } from "./todo-timer.service";
 })
 export class TodoService {
 	todos = signal(this.getStorage());
-	private trashKey = "todos";
-	private trash = inject(TrashService);
-	private timer = inject(TodoTimerService);
-
 	saveListOnStorage = effect(() => {
 		localStorage.setItem('list', JSON.stringify(this.todos()))
 	})
+	private trashKey = "todos";
+	private trash = inject(TrashService);
+	private timer = inject(TodoTimerService);
 
 	delete(todo: Todo) {
 		this.todos.update(todos => todos.filter((item, index) => {

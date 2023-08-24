@@ -3,45 +3,43 @@ import { TodoTimerHelperService } from "./todo-timer-helper.service";
 import { TodoTimerStorageService } from "./todo-timer-storage.service";
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: 'root'
 })
 export class TodoTimerService {
-    isPaused = signal(true);
-    allTimeSpent = signal(0);
-    currentTodoId?: number;
+	isPaused = signal(true);
+	allTimeSpent = signal(0);
+	currentTodoId?: number;
 
-    private helper = inject(TodoTimerHelperService);
-    private storage = inject(TodoTimerStorageService);
-
-    currentCounterDecrescent = computed(() => this.helper.currentCounterDecrescent(this.allTimeSpent()));
-    currentTotalCounter = computed(() => this.helper.currentTotalCounter(this.allTimeSpent()));
-    cycles = computed(() => this.helper.getCyclesCount(this.allTimeSpent()));
-
-    private intervalId = 0;
+	private helper = inject(TodoTimerHelperService);
+	currentCounterDecrescent = computed(() => this.helper.currentCounterDecrescent(this.allTimeSpent()));
+	currentTotalCounter = computed(() => this.helper.currentTotalCounter(this.allTimeSpent()));
+	cycles = computed(() => this.helper.getCyclesCount(this.allTimeSpent()));
+	private storage = inject(TodoTimerStorageService);
+	private intervalId = 0;
 
 
-    resume() {
-        const oneSecond = 1;
-        this.isPaused.set(false);
+	resume() {
+		const oneSecond = 1;
+		this.isPaused.set(false);
 
-        this.intervalId = setInterval(this.updateCounter, oneSecond)
-    }
+		this.intervalId = setInterval(this.updateCounter, oneSecond)
+	}
 
-    restart(todoId: number) {
-        this.currentTodoId = todoId;
-        clearInterval(this.intervalId);
-        this.isPaused.set(true);
-        this.allTimeSpent.set(this.storage.get(todoId) ?? 0);
-    }
+	restart(todoId: number) {
+		this.currentTodoId = todoId;
+		clearInterval(this.intervalId);
+		this.isPaused.set(true);
+		this.allTimeSpent.set(this.storage.get(todoId) ?? 0);
+	}
 
-    pause() {
-        clearInterval(this.intervalId);
-        this.isPaused.set(true);
-    }
+	pause() {
+		clearInterval(this.intervalId);
+		this.isPaused.set(true);
+	}
 
-    private updateCounter = () => {
-        if(!this.currentTodoId) throw new Error("currentTodoId needs to be setted");
-        this.allTimeSpent.update(current => current + 1);
-        this.storage.save(this.currentTodoId, this.allTimeSpent());
-    }
+	private updateCounter = () => {
+		if(!this.currentTodoId) throw new Error("currentTodoId needs to be setted");
+		this.allTimeSpent.update(current => current + 1);
+		this.storage.save(this.currentTodoId, this.allTimeSpent());
+	}
 }

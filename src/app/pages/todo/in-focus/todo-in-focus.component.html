@@ -1,18 +1,18 @@
 <div
-  class="rounded-box"
-  appPoppover
-  [poppoverComponent]="poppoverComponent"
-  (mouseenter)="showInfo()"
-  (mouseleave)="closeInfo()"
+	(mouseenter)="showInfo()"
+	(mouseleave)="closeInfo()"
+	[poppoverComponent]="poppoverComponent"
+	appPoppover
+	class="rounded-box"
 >
 
-  <app-todo-item
-    (toggle)="toggle.emit($event)"
-    [actionsFn]="actionsFn"
-    [item]="current"
-  >
-  </app-todo-item>
+	<app-todo-item
+		(toggle)="toggle.emit($event)"
+		[actionsFn]="actionsFn"
+		[item]="current"
+	>
+	</app-todo-item>
 
-  <mat-icon class="material-icons-outlined">info</mat-icon>
+	<mat-icon class="material-icons-outlined">info</mat-icon>
 
 </div>

@@ -1,8 +1,8 @@
 <h1 *ngIf="principalTitle">{{principalTitle}}</h1>
 <form>
-  <ng-content></ng-content>
+	<ng-content></ng-content>
 </form>
 
 <div *ngIf="actions.length" class="actions">
-  <app-button-action *ngFor="let action of actions" [action]="action"/>
+	<app-button-action *ngFor="let action of actions" [action]="action"/>
 </div>

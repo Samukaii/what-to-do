@@ -8,21 +8,21 @@ import { ButtonActionComponent } from './button-action.component';
 import { DynamicComponentComponent } from '../dynamic-component/dynamic-component.component';
 
 
-
 @NgModule({
-  declarations: [
-    ButtonActionRaisedComponent,
-    ButtonActionIconComponent,
-    ButtonActionComponent
-  ],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatButtonModule,
-    DynamicComponentComponent,
-  ],
-  exports: [
-    ButtonActionComponent
-  ]
+	declarations: [
+		ButtonActionRaisedComponent,
+		ButtonActionIconComponent,
+		ButtonActionComponent
+	],
+	imports: [
+		CommonModule,
+		MatIconModule,
+		MatButtonModule,
+		DynamicComponentComponent,
+	],
+	exports: [
+		ButtonActionComponent
+	]
 })
-export class ButtonActionModule { }
+export class ButtonActionModule {
+}

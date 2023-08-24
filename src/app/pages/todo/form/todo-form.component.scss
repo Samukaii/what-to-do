@@ -1,23 +1,23 @@
 :host {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 mat-form-field {
-  width: 100%;
+	width: 100%;
 }
 
 .actions {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 form {
-  width: 100%;
+	width: 100%;
 }
 
 .actions {
-  display: flex;
-  gap: 1rem;
+	display: flex;
+	gap: 1rem;
 }

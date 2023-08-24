@@ -1,7 +1,9 @@
-import {FormGroupOf} from "src/app/shared/types/form-group-of";
+import { FormGroupOf } from "src/app/shared/types/form-group-of";
+import { TodoPriorityEnum } from "./todo-priority.enum";
 
 export type TodoForm = FormGroupOf<{
-    title: string;
-    description: string | null;
-    cycles: number;
+	title: string;
+	priority: TodoPriorityEnum;
+	description: string | null;
+	cycles: number;
 }>;

@@ -17,9 +17,9 @@ export class TodoListComponent {
 	@Output() toggle = new EventEmitter<Todo>();
 	@Output() reorder = new EventEmitter<CdkDragDrop<Todo>>();
 	@Input({ required: true }) items!: Todo[];
-	@Input() actionsFn: ButtonActionsFn<Todo> = () => [];
-
 	poppoverComponent = TodoInfoComponent;
+
+	@Input() actionsFn: ButtonActionsFn<Todo> = () => [];
 
 	showInfo(todo: Todo, origin: HTMLElement) {
 		this.poppover.open({ todo }, { origin })

@@ -10,7 +10,7 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
 	styleUrls: ['./todo-info.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [
-		trigger('flyInOut', [
+		trigger('fade', [
 			state('in', style({ opacity: 0 })),
 			transition(':enter', [
 				style({ opacity: 0 }),
@@ -28,7 +28,8 @@ export class TodoInfoComponent {
 	helper = inject(TodoTimerHelperService);
 	storage = inject(TodoTimerStorageService);
 
-	@HostBinding('@flyInOut') animation = true;
+	@HostBinding('@fade') animation = true;
+	@HostBinding("class.mat-elevation-z2") elevation = true;
 
 	allTime = computed(() => {
 		return this.storage.allTimeSpents()[this.todo.id] ?? 0;
@@ -41,8 +42,6 @@ export class TodoInfoComponent {
 	cycles = computed(() => {
 		return this.helper.getCyclesCount(this.allTime());
 	});
-
-	@HostBinding("class.mat-elevation-z2") elevation = true;
 
 	timeEstimated(todo?: Todo) {
 		if(!todo) return 0;

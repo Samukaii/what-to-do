@@ -4,10 +4,10 @@ import { ButtonActionTypes } from "./types/button-action-types";
 
 
 export const buttonActionTypes = {
-    raised: ButtonActionRaisedComponent,
-    icon: ButtonActionIconComponent,
+	raised: ButtonActionRaisedComponent,
+	icon: ButtonActionIconComponent,
 }
 
-export const getComponent = (type: ButtonActionTypes) =>{
-    return buttonActionTypes[type];
+export const getComponent = (type: ButtonActionTypes) => {
+	return buttonActionTypes[type];
 }

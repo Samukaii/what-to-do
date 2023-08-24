@@ -1,12 +1,12 @@
 <div
-  [style.justify-content]="justifyContent()"
-  class="actions">
-  <ng-container
-    *ngFor="let action of computedActions()"
-  >
-    <app-button-action
-      *ngIf="action.condition ?? true"
-      [action]="action"
-    />
-  </ng-container>
+	[style.justify-content]="justifyContent()"
+	class="actions">
+	<ng-container
+		*ngFor="let action of computedActions()"
+	>
+		<app-button-action
+			*ngIf="action.condition ?? true"
+			[action]="action"
+		/>
+	</ng-container>
 </div>

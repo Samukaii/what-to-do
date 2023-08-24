@@ -1,18 +1,18 @@
 <div class="clock">
-    <div
-      [style.transform]="'rotateZ(' + (360 / inputs.allTimeInSeconds()) * i + 'deg)'"
-      *ngFor="let indicator of indicators(); let i = index" class="clock__indicator"
-    ></div>
+	<div
+		*ngFor="let indicator of indicators(); let i = index"
+		[style.transform]="'rotateZ(' + (360 / inputs.allTimeInSeconds()) * i + 'deg)'" class="clock__indicator"
+	></div>
 
-    <div class="clock__pointer"
-         [style.transform]="pointerRotation()"
-    >
-      <div class="arrow">
-      </div>
-    </div>
+	<div [style.transform]="pointerRotation()"
+		 class="clock__pointer"
+	>
+		<div class="arrow">
+		</div>
+	</div>
 
 
-    <div class="clock__content">
-        <ng-content></ng-content>
-    </div>
+	<div class="clock__content">
+		<ng-content></ng-content>
+	</div>
 </div>

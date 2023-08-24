@@ -1,3 +1,3 @@
-export interface Identifiable{
-  id: number;
+export interface Identifiable {
+	id: number;
 }

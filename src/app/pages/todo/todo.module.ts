@@ -28,43 +28,45 @@ import { CyclesCounterComponent } from "../../shared/components/cycles-counter/c
 import { TodoInFocusComponent } from './in-focus/todo-in-focus.component';
 import { PoppoverDirective } from "../../shared/directives/poppover.directive";
 import { TodoInfoComponent } from "./info/todo-info.component";
+import { SelectComponent } from "../../shared/components/form/select/select.component";
 
 
 @NgModule({
-    declarations: [
-        TodoInFocusComponent,
-        TodoFormComponent,
-        TodoUpdateComponent,
-        TodoListComponent,
-        TodoComponent,
-        TodoItemComponent,
-        TodoCreateComponent,
-        TodoTimeComponent,
-        TodoInfoComponent
-    ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        ButtonActionModule,
-        InputComponent,
-        TextareaComponent,
-        ActionsContainerComponent,
-        MatCheckboxModule,
-        ClockComponent,
-        TabsComponent,
-        CounterComponent,
-        FormComponent,
-        NoResultsComponent,
-        CdkDropList,
-        CdkDrag,
-        SecondsToTimePipe,
-        CyclesCounterComponent,
-        PoppoverDirective
-    ]
+	declarations: [
+		TodoInFocusComponent,
+		TodoFormComponent,
+		TodoUpdateComponent,
+		TodoListComponent,
+		TodoComponent,
+		TodoItemComponent,
+		TodoCreateComponent,
+		TodoTimeComponent,
+		TodoInfoComponent
+	],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatIconModule,
+		MatInputModule,
+		ButtonActionModule,
+		InputComponent,
+		TextareaComponent,
+		ActionsContainerComponent,
+		MatCheckboxModule,
+		ClockComponent,
+		TabsComponent,
+		CounterComponent,
+		FormComponent,
+		NoResultsComponent,
+		CdkDropList,
+		CdkDrag,
+		SecondsToTimePipe,
+		CyclesCounterComponent,
+		PoppoverDirective,
+		SelectComponent
+	]
 })
 export class TodoModule {
 }

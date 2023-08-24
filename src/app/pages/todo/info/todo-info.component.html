@@ -1,18 +1,18 @@
 <div class="info">
-    <strong>
-        Total:
-    </strong>
-    <p>
-        {{allTime() | secondsToTime}}
-    </p>
+	<strong>
+		Total:
+	</strong>
+	<p>
+		{{allTime() | secondsToTime}}
+	</p>
 </div>
 
 <div class="info estimated">
-    <strong>
-        Tempo estimado:
-    </strong>
-    <div>
-		<p >
+	<strong>
+		Tempo estimado:
+	</strong>
+	<div>
+		<p>
 			<ng-container [ngPlural]="todo.cycles">
 				<ng-template ngPluralCase="=1">
 					{{todo.cycles}} ciclo
@@ -23,14 +23,14 @@
 			</ng-container>
 			({{timeEstimated(todo) | secondsToTime}})
 		</p>
-    </div>
+	</div>
 </div>
 
 <div class="info">
-    <strong>
-        Tempo gasto:
-    </strong>
-    <p>
-        {{timeWorked() | secondsToTime}}
-    </p>
+	<strong>
+		Tempo gasto:
+	</strong>
+	<p>
+		{{timeWorked() | secondsToTime}}
+	</p>
 </div>
