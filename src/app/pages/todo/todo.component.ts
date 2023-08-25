@@ -91,7 +91,7 @@ export class TodoComponent {
 		this.service.toggle(todo)
 	}
 
-	reorder(event: CdkDragDrop<Todo>) {
+	reorder(event: CdkDragDrop<Todo[]>) {
 		this.service.reorder(event);
 	}
 

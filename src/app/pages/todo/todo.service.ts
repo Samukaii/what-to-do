@@ -44,7 +44,7 @@ export class TodoService {
 		}))
 	}
 
-	reorder(event: CdkDragDrop<Todo>) {
+	reorder(event: CdkDragDrop<Todo[]>) {
 		const inFocus = this.todos().find(todo => todo.inFocus);
 		const notInFocus = this.todos().filter(todo => !todo.inFocus)
 		const result: Todo[] = [...notInFocus];
@@ -70,13 +70,14 @@ export class TodoService {
 	}
 
 	create(value: FormValue<TodoForm>) {
-		const { title, description, cycles } = value;
+		const { title, description, cycles, priority } = value;
 		if(!title) return;
 
 		this.todos.update(items => [{
 			id: generateId(),
 			title,
 			cycles,
+			priority,
 			description: description ?? "",
 			completed: false,
 			inFocus: false,

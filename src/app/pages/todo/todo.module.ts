@@ -29,6 +29,7 @@ import { TodoInFocusComponent } from './in-focus/todo-in-focus.component';
 import { PoppoverDirective } from "../../shared/directives/poppover.directive";
 import { TodoInfoComponent } from "./info/todo-info.component";
 import { SelectComponent } from "../../shared/components/form/select/select.component";
+import { CallPipe } from "../../shared/pipes/call.pipe";
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { SelectComponent } from "../../shared/components/form/select/select.comp
 	],
 	imports: [
 		CommonModule,
+		CallPipe,
 		ReactiveFormsModule,
 		MatButtonModule,
 		MatFormFieldModule,
