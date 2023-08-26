@@ -1,10 +1,9 @@
 # What to do?
 
-[![GitHub license](https://img.shields.io/github/license/seu-usuario/What-to-do)](https://github.com/seu-usuario/What-to-do/blob/main/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/seu-usuario/What-to-do)](https://github.com/seu-usuario/What-to-do/stargazers)
-[![GitHub issues](https://img.shields.io/github/issues/seu-usuario/What-to-do)](https://github.com/seu-usuario/What-to-do/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/seu-usuario/What-to-do)](https://github.com/seu-usuario/What-to-do/pulls)
-[![Twitter Follow](https://img.shields.io/twitter/follow/seuusuario?style=social)](https://twitter.com/seuusuario)
+[![GitHub license](https://img.shields.io/github/license/Samukaii/What-to-do)](https://github.com/seu-usuario/What-to-do/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/Samukaii/What-to-do)](https://github.com/seu-usuario/What-to-do/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/Samukaii/What-to-do)](https://github.com/seu-usuario/What-to-do/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/Samukaii/What-to-do)](https://github.com/seu-usuario/What-to-do/pulls)
 
 Bem-vindo ao Projeto "What to do?"! Este é um projeto de desenvolvimento front-end que combina gerenciamento de tarefas com um contador de tempo integrado.
 
