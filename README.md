@@ -24,8 +24,7 @@ O Projeto "What to do?" oferece uma experiência de gerenciamento de tarefas alt
 
 ## Capturas de Tela
 
-![what-to-do-demo](https://github.com/Samukaii/what-to-do/assets/54710691/4e83c282-c329-4d29-9173-36eaa5b8b810)
-![image](https://github.com/Samukaii/what-to-do/assets/54710691/7a100566-6f62-4bd6-b771-48ed25506685)
+![what-to-do-demo](https://github.com/Samukaii/what-to-do/assets/54710691/b5678060-b9e9-4dd5-8249-0605b5d582f6)
 
 ## Experimente Agora!
 
