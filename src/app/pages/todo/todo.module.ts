@@ -22,7 +22,7 @@ import { TodoUpdateComponent } from "./update/todo-update.component";
 import { TodoCreateComponent } from "./create/todo-create.component";
 import { FormComponent } from "../../shared/components/form/form/form.component";
 import { NoResultsComponent } from "../../shared/components/actions-container/no-results.component";
-import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
+import { CdkDrag, CdkDropList, CdkDropListGroup } from "@angular/cdk/drag-drop";
 import { SecondsToTimePipe } from "../../shared/pipes/seconds-to-time.pipe";
 import { CyclesCounterComponent } from "../../shared/components/cycles-counter/cycles-counter.component";
 import { TodoInFocusComponent } from './in-focus/todo-in-focus.component';
@@ -30,6 +30,8 @@ import { PoppoverDirective } from "../../shared/directives/poppover.directive";
 import { TodoInfoComponent } from "./info/todo-info.component";
 import { SelectComponent } from "../../shared/components/form/select/select.component";
 import { CallPipe } from "../../shared/pipes/call.pipe";
+import { TodoListByPriorityComponent } from "./list/list-by-priority/todo-list-by-priority.component";
+import { VarDirective } from "../../shared/directives/var.directive";
 
 
 @NgModule({
@@ -42,7 +44,8 @@ import { CallPipe } from "../../shared/pipes/call.pipe";
 		TodoItemComponent,
 		TodoCreateComponent,
 		TodoTimeComponent,
-		TodoInfoComponent
+		TodoInfoComponent,
+		TodoListByPriorityComponent
 	],
 	imports: [
 		CommonModule,
@@ -67,7 +70,9 @@ import { CallPipe } from "../../shared/pipes/call.pipe";
 		SecondsToTimePipe,
 		CyclesCounterComponent,
 		PoppoverDirective,
-		SelectComponent
+		SelectComponent,
+		CdkDropListGroup,
+		VarDirective
 	]
 })
 export class TodoModule {

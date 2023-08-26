@@ -20,7 +20,7 @@ import { TodoTimerService } from '../todo-timer.service';
 })
 export class TodoTimeComponent {
 	@Output() timeSpent = new EventEmitter<number>();
-	@Input({ required: true }) currentTodo!: Todo;
+	@Input({ required: true }) currentTodo: Todo | undefined;
 
 	protected counter = inject(TodoTimerService);
 
@@ -33,7 +33,7 @@ export class TodoTimeComponent {
 				click: () => {
 					this.counter.pause();
 				},
-				condition: !this.counter?.isPaused(),
+				condition: this.counter?.status() === "playing",
 				options: {
 					text: "Pausar",
 					icon: "pause",
@@ -43,9 +43,11 @@ export class TodoTimeComponent {
 			{
 				type: "raised",
 				click: () => {
-					this.counter.resume();
+					this.counter.status() === "stopped"
+						? this.counter.restart(this.currentTodo!.id)
+						: this.counter.resume();
 				},
-				condition: this.counter?.isPaused(),
+				condition: this.counter?.status() !== "playing",
 				options: {
 					text: "Continuar",
 					icon: "play_arrow",

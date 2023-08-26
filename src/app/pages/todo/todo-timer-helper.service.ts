@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-
-type StepName = 'work' | 'short-rest' | 'long-rest';
+import { TimerStepName } from "../../shared/models/timer-step-name";
 
 @Injectable({
 	providedIn: 'root'
@@ -17,7 +16,7 @@ export class TodoTimerHelperService {
 		return completed * 130 + remaining * 30;
 	}
 
-	currentTotalCounterByStepName(stepName: StepName) {
+	currentTotalCounterByStepName(stepName: TimerStepName) {
 		switch(stepName) {
 			case "work":
 				return 25 * 60;
@@ -65,7 +64,7 @@ export class TodoTimerHelperService {
 		return (timeInSeconds - this.shortRestTimeSpent(timeInSeconds) - this.longRestTimeSpent(timeInSeconds))
 	}
 
-	currentStepName(timeInSeconds: number): StepName {
+	currentStepName(timeInSeconds: number): TimerStepName {
 		const all = this.inMinutes(timeInSeconds);
 
 		const completeLongCycle = 130;

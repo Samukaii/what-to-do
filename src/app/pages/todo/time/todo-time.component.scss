@@ -12,3 +12,21 @@ app-clock {
 .time {
 	font-size: 2rem;
 }
+
+strong {
+	color: rgb(var(--color-primary));
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+mat-icon {
+	color: rgb(var(--color-primary));
+	width: fit-content;
+	height: fit-content;
+}
+
+p {
+	display: flex;
+	align-items: center;
+	color: gray;
+}

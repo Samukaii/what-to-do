@@ -1,60 +1,10 @@
-<ul
-	cdkDropListGroup
-	*ngIf="!!items.length; else noResults">
-	<li
-		*ngFor="let group of todosByPriorities | call: items">
-		<ul
-			(cdkDropListDropped)="reorder.emit($event)"
-			[cdkDropListData]="group.list"
-			cdkDropList>
-			<h1>{{priorityName | call: group.priority}}</h1>
-			<li
-				*ngFor="let item of group.list"
-				cdkDrag
-				class="rounded-box">
-				<div
-					#todo
-					(mouseenter)="showInfo(item, todo)"
-					(mouseleave)="closeInfo()"
-					[poppoverComponent]="poppoverComponent"
-					appPoppover
-					class="todo"
-				>
-					<app-todo-item
-						(toggle)="toggle.emit($event)"
-						[actionsFn]="actionsFn" [item]="item"
-					/>
-					<mat-icon class="material-icons-outlined">info</mat-icon>
-				</div>
-			</li>
-		</ul>
-	</li>
-</ul>
+<app-tabs
+	[padding]="0"
+	*ngIf="items.length; else noResults"
+	[tabs]="getTabs | call: items"
+>
 
-<ul
-	(cdkDropListDropped)="reorder.emit($event)"
-	*ngIf="!!items.length; else noResults"
-	cdkDropList>
-	<li
-		*ngFor="let item of items"
-		cdkDrag
-		class="rounded-box">
-		<div
-			#todo
-			(mouseenter)="showInfo(item, todo)"
-			(mouseleave)="closeInfo()"
-			[poppoverComponent]="poppoverComponent"
-			appPoppover
-			class="todo"
-		>
-			<app-todo-item
-				(toggle)="toggle.emit($event)"
-				[actionsFn]="actionsFn" [item]="item"
-			/>
-			<mat-icon class="material-icons-outlined">info</mat-icon>
-		</div>
-	</li>
-</ul>
+</app-tabs>
 
 <ng-template #noResults>
 	<app-no-results description="Adicione uma tarefa" icon="format_list_bulleted"

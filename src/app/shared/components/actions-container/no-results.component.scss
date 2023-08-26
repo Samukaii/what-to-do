@@ -8,13 +8,13 @@
 }
 
 strong {
-	color: var(--color-primary);
+	color: rgb(var(--color-primary));
 	font-size: 1rem;
 	font-weight: 500;
 }
 
 mat-icon {
-	color: var(--color-primary);
+	color: rgb(var(--color-primary));
 	width: fit-content;
 	height: fit-content;
 	font-size: 2.5rem;

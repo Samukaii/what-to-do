@@ -22,8 +22,4 @@ export class TodoInFocusComponent {
 			todo: this.current
 		})
 	}
-
-	closeInfo() {
-		this.poppover.close();
-	}
 }

@@ -8,7 +8,18 @@
 </app-clock>
 
 <app-actions-container
+	*ngIf="currentTodo; else noCurrentTodo"
 	[actionsFn]="actionsFn()"
 	alignment="center"
 />
 
+<ng-template #noCurrentTodo>
+	<strong>Nenhuma tarefa iniciada</strong>
+	<p class="description">
+		Clique em
+		<mat-icon>play_arrow</mat-icon>
+		para iniciar uma tarefa ou
+		<mat-icon>add</mat-icon>
+		para criar uma nova
+	</p>
+</ng-template>

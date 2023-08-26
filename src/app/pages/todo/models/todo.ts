@@ -8,5 +8,4 @@ export interface Todo {
 	priority: TodoPriorityEnum;
 	completed: boolean;
 	inFocus: boolean;
-	timeSpent: number;
 }

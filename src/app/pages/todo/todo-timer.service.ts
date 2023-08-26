@@ -6,7 +6,7 @@ import { TodoTimerStorageService } from "./todo-timer-storage.service";
 	providedIn: 'root'
 })
 export class TodoTimerService {
-	isPaused = signal(true);
+	status = signal<"stopped" | "playing" | "paused">("stopped");
 	allTimeSpent = signal(0);
 	currentTodoId?: number;
 
@@ -17,10 +17,9 @@ export class TodoTimerService {
 	private storage = inject(TodoTimerStorageService);
 	private intervalId = 0;
 
-
 	resume() {
-		const oneSecond = 1;
-		this.isPaused.set(false);
+		const oneSecond = 1000;
+		this.status.set("playing");
 
 		this.intervalId = setInterval(this.updateCounter, oneSecond)
 	}
@@ -28,17 +27,22 @@ export class TodoTimerService {
 	restart(todoId: number) {
 		this.currentTodoId = todoId;
 		clearInterval(this.intervalId);
-		this.isPaused.set(true);
+		this.status.set("playing");
 		this.allTimeSpent.set(this.storage.get(todoId) ?? 0);
+
+		this.resume();
 	}
 
 	pause() {
 		clearInterval(this.intervalId);
-		this.isPaused.set(true);
+		this.status.set("paused");
 	}
 
 	private updateCounter = () => {
+		if(this.status() !== "playing") return;
+
 		if(!this.currentTodoId) throw new Error("currentTodoId needs to be setted");
+
 		this.allTimeSpent.update(current => current + 1);
 		this.storage.save(this.currentTodoId, this.allTimeSpent());
 	}

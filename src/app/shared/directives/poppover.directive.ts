@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, Type } from "@angular/core";
+import { ComponentRef, Directive, ElementRef, inject, Input, OnDestroy, Renderer2, Type } from "@angular/core";
 import { Overlay, OverlayRef, PositionStrategy } from "@angular/cdk/overlay";
 import { ComponentPortal } from "@angular/cdk/portal";
 
@@ -10,40 +10,68 @@ export interface PoppoverConfig {
 	selector: '[appPoppover]',
 	standalone: true
 })
-export class PoppoverDirective<T> {
+export class PoppoverDirective<T> implements OnDestroy {
 	@Input({ required: true }) poppoverComponent!: Type<T>;
 
 	overlayRef?: OverlayRef;
+	componentRef!: ComponentRef<T>;
 
-	constructor(
-		private elementRef: ElementRef,
-		private overlay: Overlay,
-	) {
-	}
+	private elementRef = inject(ElementRef);
+	private renderer = inject(Renderer2);
+	private overlay = inject(Overlay);
 
 	open(info: Partial<T>, config?: PoppoverConfig) {
+		this.overlayRef?.detach();
+
 		this.overlayRef = this.overlay.create({
 			hasBackdrop: false,
 			disposeOnNavigation: true,
 			positionStrategy: this.getOverlayPosition(config?.origin ?? this.elementRef),
 			scrollStrategy: this.overlay.scrollStrategies.close()
-
 		});
 
-		const componentRef = this.overlayRef.attach(
+
+		this.componentRef = this.overlayRef.attach(
 			new ComponentPortal(this.poppoverComponent)
 		);
 
-		Object.keys(info).forEach(key => {
-			const property = info[key as keyof T]
-			if(property)
-				componentRef.instance[key as keyof T] = property;
-		});
-		componentRef.changeDetectorRef.markForCheck();
+		this.applyPoppoverContext(info);
+		this.listenMouseLeave(
+			config?.origin instanceof ElementRef
+				? config.origin.nativeElement
+				: config?.origin ?? this.elementRef.nativeElement
+		);
 	}
 
 	close() {
 		this.overlayRef?.detach();
+		this.unlistenMouseLeaveOfPoppover();
+	}
+
+	ngOnDestroy() {
+		this.close();
+	}
+
+	private applyPoppoverContext(info: Partial<T>) {
+		Object.keys(info).forEach(key => {
+			const property = info[key as keyof T]
+			if(property)
+				this.componentRef.instance[key as keyof T] = property;
+		});
+		this.componentRef.changeDetectorRef.markForCheck();
+	}
+
+	private unlistenMouseLeaveOfPoppover = () => {
+	};
+
+	private listenMouseLeave(element: HTMLElement) {
+		this.unlistenMouseLeaveOfPoppover = this.renderer.listen(
+			element,
+			'mouseleave',
+			() => {
+				this.close()
+			}
+		);
 	}
 
 	private getOverlayPosition(origin: ElementRef | HTMLElement): PositionStrategy {
@@ -52,15 +80,15 @@ export class PoppoverDirective<T> {
 			.flexibleConnectedTo(origin)
 			.withPositions([
 				{
-					originX: 'end',
+					originX: 'center',
 					originY: 'bottom',
-					overlayX: 'end',
+					overlayX: 'center',
 					overlayY: 'top',
 				},
 				{
-					originX: 'end',
+					originX: 'center',
 					originY: 'top',
-					overlayX: 'end',
+					overlayX: 'center',
 					overlayY: 'bottom',
 				},
 			]);

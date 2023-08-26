@@ -45,15 +45,36 @@ export class TodoService {
 	}
 
 	reorder(event: CdkDragDrop<Todo[]>) {
+		const inFocus = this.currentInFocus();
+		const allNotInFocus = this.todos().filter(todo => !todo.inFocus);
+
+		const itemToMove = event.container.data[event.previousIndex];
+		const itemsWithThisPriority = allNotInFocus.filter(item => item.priority === itemToMove.priority);
+		const otherItems = allNotInFocus.filter(item => item.priority !== itemToMove.priority);
+
+		moveItemInArray(itemsWithThisPriority, event.previousIndex, event.currentIndex);
+
+		const newList = [
+			...itemsWithThisPriority,
+			...otherItems
+		];
+
+		if(inFocus) newList.unshift(inFocus);
+
+		this.todos.set(newList);
+
+		this.orderByPriority();
+	}
+
+	private orderByPriority() {
 		const inFocus = this.todos().find(todo => todo.inFocus);
-		const notInFocus = this.todos().filter(todo => !todo.inFocus)
-		const result: Todo[] = [...notInFocus];
+		const allNotInFocus = this.todos().filter(todo => !todo.inFocus);
 
-		moveItemInArray(result, event.previousIndex, event.currentIndex);
+		allNotInFocus.sort((previous, current) => current.priority - previous.priority)
 
-		if(inFocus) result.unshift(inFocus);
+		if(inFocus) allNotInFocus.unshift(inFocus);
 
-		this.todos.set(result);
+		this.todos.set(allNotInFocus);
 	}
 
 	recover() {
@@ -67,6 +88,8 @@ export class TodoService {
 
 			return newTodos;
 		});
+
+		this.orderByPriority();
 	}
 
 	create(value: FormValue<TodoForm>) {
@@ -81,15 +104,14 @@ export class TodoService {
 			description: description ?? "",
 			completed: false,
 			inFocus: false,
-			timeSpent: 0
 		}, ...items]);
+
+		this.orderByPriority();
 	}
 
 	currentInFocus = () => this.todos().find(todo => todo.inFocus);
 
 	focus(id: number) {
-		this.saveTimeSpent();
-
 		this.todos.update(todos => {
 			return todos.map(todo => {
 				if(todo.id !== id) return {
@@ -103,6 +125,8 @@ export class TodoService {
 				}
 			})
 		});
+
+		this.orderByPriority();
 
 		this.timer.restart(this.currentInFocus()!.id)
 	}
@@ -119,18 +143,10 @@ export class TodoService {
 				}
 			})
 		})
+
+		this.orderByPriority();
 	}
 
-	private saveTimeSpent() {
-		this.todos.update(todos => todos.map(todo => {
-			if(!todo.inFocus) return todo;
-
-			return {
-				...todo,
-				timeSpent: this.timer.allTimeSpent()
-			}
-		}));
-	}
 
 	private getStorage(): Todo[] {
 		const fromStorage = localStorage.getItem('list') || "[]";

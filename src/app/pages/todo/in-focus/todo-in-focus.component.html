@@ -1,6 +1,5 @@
 <div
 	(mouseenter)="showInfo()"
-	(mouseleave)="closeInfo()"
 	[poppoverComponent]="poppoverComponent"
 	appPoppover
 	class="rounded-box"
@@ -12,7 +11,4 @@
 		[item]="current"
 	>
 	</app-todo-item>
-
-	<mat-icon class="material-icons-outlined">info</mat-icon>
-
 </div>

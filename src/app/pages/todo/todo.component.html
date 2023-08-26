@@ -1,6 +1,5 @@
 <app-todo-time
-	*ngIf="todoInFocus() as inFocus"
-	[currentTodo]="inFocus"
+	[currentTodo]="todoInFocus()"
 />
 
 <app-todo-in-focus

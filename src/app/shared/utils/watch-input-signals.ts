@@ -5,8 +5,6 @@ export const watchInputSignals = <T, K extends keyof T>(inputSignals: InputSigna
 	Object.keys(inputSignals).forEach((key) => {
 		if(changes[key]) {
 			inputSignals[key as K].set(changes[key].currentValue);
-
-			console.log(key, changes[key].currentValue)
 		}
 	});
 };

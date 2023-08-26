@@ -1,0 +1,28 @@
+<ul
+	*ngIf="!!tabData.items.length; else noResults"
+	(cdkDropListDropped)="reorder($event)"
+	[cdkDropListData]="tabData.items"
+	cdkDropList>
+	<li
+		*ngFor="let item of tabData.items"
+		cdkDrag
+		class="rounded-box">
+		<div
+			#todo
+			(mouseenter)="showInfo(item, todo)"
+			[poppoverComponent]="poppoverComponent"
+			appPoppover
+			class="todo"
+		>
+			<app-todo-item
+				(toggle)="tabData.toggle($event)"
+				[actionsFn]="tabData.actionsFn" [item]="item"
+			/>
+		</div>
+	</li>
+</ul>
+
+<ng-template #noResults>
+	<app-no-results description="Adicione uma tarefa" icon="format_list_bulleted"
+					label="Nenhuma tarefa adicionada"/>
+</ng-template>

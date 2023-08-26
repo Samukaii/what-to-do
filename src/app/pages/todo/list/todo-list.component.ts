@@ -5,31 +5,9 @@ import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import { TodoInfoComponent } from "../info/todo-info.component";
 import { PoppoverDirective } from "../../../shared/directives/poppover.directive";
 import { TodoPriorityEnum } from "../models/todo-priority.enum";
-
-
-type Group<T, K extends keyof T> = { [k in K]: T[k] } & { list: T[] };
-
-
-export const groupByProperty = <T, K extends keyof T>(list: T[], property: K) => {
-	const groupped: Group<T, K>[] = [];
-
-	list.forEach(item => {
-		const group = groupped.find(group => group[property] === item[property])
-
-		if(group) {
-			group.list.push(item);
-			return;
-		}
-
-		groupped.push({
-			[property]: item[property],
-			list: [item]
-		} as Group<T, K>)
-
-	})
-
-	return groupped;
-}
+import { buildComponentTab, Tab } from "../../../shared/components/tabs/models/tab";
+import { TodoListByPriorityComponent } from "./list-by-priority/todo-list-by-priority.component";
+import { groupByProperty } from "../../../shared/utils/group-by-property";
 
 
 @Component({
@@ -44,16 +22,24 @@ export class TodoListComponent {
 	@Output() toggle = new EventEmitter<Todo>();
 	@Output() reorder = new EventEmitter<CdkDragDrop<Todo[]>>();
 	@Input({ required: true }) items!: Todo[];
-	poppoverComponent = TodoInfoComponent;
 
 	@Input() actionsFn: ButtonActionsFn<Todo> = () => [];
 
-	showInfo(todo: Todo, origin: HTMLElement) {
-		this.poppover.open({ todo }, { origin })
-	}
+	getTabs(todos: Todo[]): Tab[] {
+		const groupped = groupByProperty(todos, 'priority');
 
-	todosByPriorities(all: Todo[]) {
-		return groupByProperty(all, 'priority');
+		return groupped.map((group) => {
+			return {
+				name: group.priority.toString(),
+				label: this.priorityName(group.priority),
+				component: buildComponentTab(TodoListByPriorityComponent, {
+					items: group.list,
+					actionsFn: this.actionsFn,
+					reorder: event => this.reorder.emit(event),
+					toggle: todo => this.toggle.emit(todo)
+				})
+			}
+		})
 	}
 
 	priorityName(priorityId: TodoPriorityEnum) {
@@ -65,9 +51,5 @@ export class TodoListComponent {
 			case TodoPriorityEnum.HIGH:
 				return "Prioridade alta";
 		}
-	}
-
-	closeInfo() {
-		this.poppover.close();
 	}
 }

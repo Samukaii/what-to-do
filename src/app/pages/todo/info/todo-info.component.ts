@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, HostBinding, inject } fro
 import { Todo } from "../models/todo";
 import { TodoTimerHelperService } from "../todo-timer-helper.service";
 import { TodoTimerStorageService } from "../todo-timer-storage.service";
-import { animate, state, style, transition, trigger } from "@angular/animations";
+import { fadeAnimation } from "../../../shared/animations/fade-animation";
 
 @Component({
 	selector: 'app-todo-info',
@@ -10,16 +10,7 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
 	styleUrls: ['./todo-info.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [
-		trigger('fade', [
-			state('in', style({ opacity: 0 })),
-			transition(':enter', [
-				style({ opacity: 0 }),
-				animate(100)
-			]),
-			transition(':leave', [
-				animate(200, style({ opacity: 0 }))
-			])
-		])
+		fadeAnimation
 	]
 })
 export class TodoInfoComponent {
