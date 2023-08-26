@@ -24,7 +24,8 @@ O Projeto "What to do?" oferece uma experiência de gerenciamento de tarefas alt
 
 ## Capturas de Tela
 
-[Adicione aqui as capturas de tela ou gifs do seu projeto.]
+![image](https://github.com/Samukaii/what-to-do/assets/54710691/7a100566-6f62-4bd6-b771-48ed25506685)
+
 
 ## Experimente Agora!
 
