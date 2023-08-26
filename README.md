@@ -32,8 +32,8 @@ Visite o [site do projeto](https://what-task-to-do.surge.sh) para testar o "What
 
 ## Como Usar
 
-1. Clone este repositório para sua máquina local usando `git clone https://github.com/seu-usuario/What-to-do.git`
-2. Navegue até o diretório do projeto: `cd What-to-do`
+1. Clone este repositório para sua máquina local usando `git clone https://github.com/samukaii/what-to-do.git`
+2. Navegue até o diretório do projeto: `cd what-to-do`
 3. Instale as dependências usando `npm install`
 4. Inicie o servidor de desenvolvimento com `npm start`
 5. Abra seu navegador e acesse `http://localhost:4200`
@@ -44,6 +44,6 @@ Se você gostaria de contribuir para este projeto, fique à vontade para abrir u
 
 ## Contato
 
-Se você tiver perguntas, sugestões ou feedback, sinta-se à vontade para entrar em contato. Você pode me encontrar em [seu-email@example.com](mailto:samuelalejandro.dev@gmail.com).
+Se você tiver perguntas, sugestões ou feedback, sinta-se à vontade para entrar em contato. Você pode me encontrar em [samuelalejandro.dev@gmail.com](mailto:samuelalejandro.dev@gmail.com).
 
 Espero que o Projeto "What to do?" torne o gerenciamento de tarefas mais eficaz e envolvente para você. Aproveite a experiência!
