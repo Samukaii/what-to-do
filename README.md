@@ -44,6 +44,6 @@ Se você gostaria de contribuir para este projeto, fique à vontade para abrir u
 
 ## Contato
 
-Se você tiver perguntas, sugestões ou feedback, sinta-se à vontade para entrar em contato. Você pode me encontrar em [seu-email@example.com](mailto:seu-email@example.com) ou me seguir no Twitter [@seuusuario](https://twitter.com/seuusuario).
+Se você tiver perguntas, sugestões ou feedback, sinta-se à vontade para entrar em contato. Você pode me encontrar em [seu-email@example.com](mailto:samuelalejandro.dev@gmail.com).
 
 Espero que o Projeto "What to do?" torne o gerenciamento de tarefas mais eficaz e envolvente para você. Aproveite a experiência!
