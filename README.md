@@ -1,27 +1,50 @@
-# Todo
+# What to do?
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
+[![GitHub license](https://img.shields.io/github/license/seu-usuario/What-to-do)](https://github.com/seu-usuario/What-to-do/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/seu-usuario/What-to-do)](https://github.com/seu-usuario/What-to-do/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/seu-usuario/What-to-do)](https://github.com/seu-usuario/What-to-do/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/seu-usuario/What-to-do)](https://github.com/seu-usuario/What-to-do/pulls)
+[![Twitter Follow](https://img.shields.io/twitter/follow/seuusuario?style=social)](https://twitter.com/seuusuario)
 
-## Development server
+Bem-vindo ao Projeto "What to do?"! Este é um projeto de desenvolvimento front-end que combina gerenciamento de tarefas com um contador de tempo integrado.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Sobre o Projeto
 
-## Code scaffolding
+O Projeto "What to do?" oferece uma experiência de gerenciamento de tarefas altamente funcional e interativa. Ele permite que você crie, edite, exclua e arraste tarefas em uma lista de afazeres. Além disso, ele inclui um contador de tempo integrado, permitindo que você rastreie o tempo gasto em cada tarefa de forma eficiente.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Recursos Principais
 
-## Build
+- Lista de tarefas intuitiva e interativa.
+- Prioridades para categorizar suas tarefas.
+- Contador de tempo integrado para rastrear o tempo gasto em cada tarefa.
+- Recursos de edição e exclusão de tarefas.
+- Capacidade de marcar tarefas como concluídas.
+- Funcionalidade de arrastar e soltar para reorganizar tarefas.
+- Tarefas são salvas localmente usando o localStorage.
+- Técnica de Pomodoro integrada para melhorar a produtividade.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Capturas de Tela
 
-## Running unit tests
+[Adicione aqui as capturas de tela ou gifs do seu projeto.]
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Experimente Agora!
 
-## Running end-to-end tests
+Visite o [site do projeto](https://what-task-to-do.surge.sh) para testar o "What to do?" ao vivo!
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Como Usar
 
-## Further help
+1. Clone este repositório para sua máquina local usando `git clone https://github.com/seu-usuario/What-to-do.git`
+2. Navegue até o diretório do projeto: `cd What-to-do`
+3. Instale as dependências usando `npm install`
+4. Inicie o servidor de desenvolvimento com `npm start`
+5. Abra seu navegador e acesse `http://localhost:4200`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Contribuição
+
+Se você gostaria de contribuir para este projeto, fique à vontade para abrir uma *issue* ou enviar um *pull request*. Sua contribuição é valiosa e pode ajudar a aprimorar o projeto!
+
+## Contato
+
+Se você tiver perguntas, sugestões ou feedback, sinta-se à vontade para entrar em contato. Você pode me encontrar em [seu-email@example.com](mailto:seu-email@example.com) ou me seguir no Twitter [@seuusuario](https://twitter.com/seuusuario).
+
+Espero que o Projeto "What to do?" torne o gerenciamento de tarefas mais eficaz e envolvente para você. Aproveite a experiência!
